@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f7cff">
+<title>Napredak</title>
+<style>
+  :root {
+    --bg: #f6f7fc; --card: #ffffff; --text: #1f2540; --muted: #6b7290; --line: #e8eaf4;
+    --blue: #3b6cf5; --blue-soft: #e8efff; --blue-dark: #2549c4;
+    --pink: #ec4899; --pink-soft: #ffe9f3; --pink-dark: #be1f74;
+    --good: #1f9d63; --bad: #d9534f;
+    --radius: 20px; --shadow: 0 6px 24px rgba(40, 55, 120, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12142a; --card: #1c1f3b; --text: #eef0ff; --muted: #9aa0c4; --line: #2b2f52;
+      --blue: #6e93ff; --blue-soft: #1f2d5e; --blue-dark: #a9c0ff;
+      --pink: #ff6fb5; --pink-soft: #4a1d3b; --pink-dark: #ffb0d6;
+      --good: #4fd18b; --bad: #ff8b87;
+      --shadow: 0 6px 24px rgba(0, 0, 0, .3);
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.45;
+    padding: 0 16px calc(40px + env(safe-area-inset-bottom));
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { padding: calc(24px + env(safe-area-inset-top)) 4px 16px; text-align: center; position: relative; }
+  header h1 {
+    margin: 0; font-size: 2rem; letter-spacing: -.5px;
+    background: linear-gradient(90deg, var(--blue), var(--pink));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: .95rem; }
+  .back { display: inline-block; margin-bottom: 8px; color: var(--muted); font-size: .9rem; font-weight: 600; text-decoration: none; }
+
+  .notice { display: none; background: #fff6e0; color: #8a5a00; border-radius: 14px; padding: 12px 14px; font-size: .86rem; margin-bottom: 16px; }
+  .notice.show { display: block; }
+  @media (prefers-color-scheme: dark) { .notice { background: #3a3016; color: #f2c46b; } }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .col { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 12px; min-width: 0; }
+  .col h2 { margin: 0 0 10px; font-size: 1.15rem; text-align: center; }
+  .col.n h2 { color: var(--blue); }
+  .col.m h2 { color: var(--pink); }
+  .add {
+    width: 100%; border: 0; border-radius: 12px; padding: 12px 6px; font-weight: 700; font-size: .92rem; color: #fff; cursor: pointer;
+    transition: transform .1s;
+  }
+  .add:active { transform: scale(.97); }
+  .n .add { background: linear-gradient(135deg, #3b6cf5, #6f92ff); }
+  .m .add { background: linear-gradient(135deg, #ec4899, #ff86c0); }
+
+  .latest { margin: 12px 0 4px; font-size: .75rem; color: var(--muted); text-align: center; }
+  .list { margin-top: 10px; }
+  .empty { text-align: center; color: var(--muted); font-size: .85rem; padding: 18px 0 8px; }
+  .entry { border-radius: 14px; padding: 10px 10px 8px; margin-bottom: 8px; position: relative; font-size: .85rem; }
+  .n .entry { background: var(--blue-soft); }
+  .m .entry { background: var(--pink-soft); }
+  .entry .date { font-weight: 700; font-size: .8rem; color: var(--muted); }
+  .entry .kg { font-size: 1.35rem; font-weight: 800; line-height: 1.2; }
+  .n .entry .kg { color: var(--blue-dark); }
+  .m .entry .kg { color: var(--pink-dark); }
+  .entry .delta { font-size: .75rem; font-weight: 700; margin-left: 4px; }
+  .delta.down { color: var(--good); }
+  .delta.up { color: var(--bad); }
+  .entry .row { display: flex; justify-content: space-between; gap: 6px; }
+  .entry .row span:first-child { color: var(--muted); }
+  .del {
+    position: absolute; top: 6px; right: 6px; border: 0; background: transparent; color: var(--muted);
+    font-size: 1rem; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; line-height: 1;
+  }
+  .del:hover { background: rgba(0,0,0,.08); }
+
+  /* Modal */
+  dialog {
+    border: 0; border-radius: 22px; padding: 22px 20px; width: min(92vw, 380px);
+    background: var(--card); color: var(--text); box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  dialog::backdrop { background: rgba(20, 22, 50, .55); }
+  dialog h3 { margin: 0 0 14px; font-size: 1.15rem; }
+  dialog.n h3 { color: var(--blue); }
+  dialog.m h3 { color: var(--pink); }
+  .f { margin-bottom: 12px; }
+  .f label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: 5px; color: var(--muted); }
+  .f input {
+    width: 100%; font-size: 1.05rem; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--line);
+    background: var(--bg); color: var(--text); outline: none; font-family: inherit;
+  }
+  dialog.n .f input:focus { border-color: var(--blue); }
+  dialog.m .f input:focus { border-color: var(--pink); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: 16px; }
+  .actions button { border: 0; border-radius: 12px; padding: 13px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+  .cancel { background: var(--bg); color: var(--muted); }
+  .save { color: #fff; }
+  dialog.n .save { background: linear-gradient(135deg, #3b6cf5, #6f92ff); }
+  dialog.m .save { background: linear-gradient(135deg, #ec4899, #ff86c0); }
+  .err { color: var(--bad); font-size: .85rem; min-height: 1.2em; margin-top: 4px; }
+  .save[disabled] { opacity: .6; }
+
+  @media (max-width: 380px) { .entry { font-size: .8rem; } .entry .kg { font-size: 1.2rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← Plan ishrane</a>
+    <h1>Napredak</h1>
+    <p>Težina i obimi · Nikola &amp; Nina</p>
+  </header>
+
+  <div class="notice" id="notice"></div>
+
+  <div class="cols">
+    <section class="col n" id="col-nikola">
+      <h2>Nikola</h2>
+      <button class="add" type="button" data-person="nikola">+ Unesi podatke</button>
+      <div class="list" id="list-nikola"></div>
+    </section>
+    <section class="col m" id="col-nina">
+      <h2>Nina</h2>
+      <button class="add" type="button" data-person="nina">+ Unesi podatke</button>
+      <div class="list" id="list-nina"></div>
+    </section>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="form" novalidate>
+    <h3 id="dlgTitle">Unos</h3>
+    <div class="f"><label for="fDate">Datum</label><input id="fDate" type="date" required></div>
+    <div class="f"><label for="fKg">Težina (kg)</label><input id="fKg" type="text" inputmode="decimal" placeholder="npr. 82,4"></div>
+    <div class="grid2">
+      <div class="f"><label for="fBelly">Obim stomaka (cm)</label><input id="fBelly" type="text" inputmode="decimal" placeholder="npr. 90"></div>
+      <div class="f"><label for="fChest">Obim grudi (cm)</label><input id="fChest" type="text" inputmode="decimal" placeholder="npr. 102"></div>
+    </div>
+    <div class="err" id="fErr"></div>
+    <div class="actions">
+      <button type="button" class="cancel" id="fCancel">Otkaži</button>
+      <button type="submit" class="save" id="fSave">Sačuvaj</button>
+    </div>
+  </form>
+</dialog>
+
+<script type="module">
+/* =====================================================================
+   PODEŠAVANJE BAZE (Firebase Firestore)
+   Zameni vrednosti ispod onim što ti Firebase pokaže (firebaseConfig),
+   i izmisli svoj tajni kod (HOUSEHOLD) – isti kod mora da bude u
+   Firestore pravilima. Dok je apiKey "PASTE_...", podaci se čuvaju samo
+   u ovom browseru.
+   ===================================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyDs8j593-NEXsPjXB341ozyFRdluftsFz0",
+  authDomain: "meal-prep-10517.firebaseapp.com",
+  projectId: "meal-prep-10517",
+  storageBucket: "meal-prep-10517.firebasestorage.app",
+  messagingSenderId: "948454603212",
+  appId: "1:948454603212:web:51d658cbcd89c0033f0569",
+};
+const HOUSEHOLD = "baca2c306c82bad858b56a34";   // tajni kod, bar 15 nasumičnih slova/brojeva
+/* ===================================================================== */
+
+const $ = id => document.getElementById(id);
+const PEOPLE = ["nikola", "nina"];
+const configured = !firebaseConfig.apiKey.startsWith("PASTE");
+
+/* ---------- Skladište (Firestore ili lokalno) ---------- */
+let store;
+if (configured) {
+  const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+  const fs = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+  const db = fs.getFirestore(initializeApp(firebaseConfig));
+  const col = fs.collection(db, "households", HOUSEHOLD, "entries");
+  store = {
+    subscribe(cb, onError) {
+      fs.onSnapshot(col, snap => cb(snap.docs.map(d => ({ id: d.id, ...d.data() }))), onError);
+    },
+    add: e => fs.addDoc(col, { ...e, createdAt: Date.now() }),
+    remove: id => fs.deleteDoc(fs.doc(db, "households", HOUSEHOLD, "entries", id)),
+  };
+} else {
+  const KEY = "mealprep-napredak-local";
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } };
+  const save = a => { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} };
+  let cb = null;
+  store = {
+    subscribe(f) { cb = f; f(load()); },
+    async add(e) { const a = load(); a.push({ ...e, id: String(Date.now()) + Math.random().toString(36).slice(2, 6) }); save(a); cb(a); },
+    async remove(id) { const a = load().filter(x => x.id !== id); save(a); cb(a); },
+  };
+  const n = $("notice");
+  n.textContent = "Baza još nije povezana – podaci se trenutno čuvaju samo na ovom telefonu. Ubaci Firebase podatke u napredak.html da bi oboje videli iste unose.";
+  n.classList.add("show");
+}
+
+/* ---------- Pomoćne ---------- */
+const pad = n => String(n).padStart(2, "0");
+const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+const showDate = iso => { const [y, m, d] = iso.split("-"); return `${d}.${m}.${y}.`; };
+const num = s => { const v = parseFloat(String(s).trim().replace(",", ".")); return isFinite(v) && v > 0 ? v : null; };
+const fmt = v => (Math.round(v * 10) / 10).toString().replace(".", ",");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ---------- Prikaz ---------- */
+function render(all) {
+  PEOPLE.forEach(p => {
+    const mine = all.filter(e => e.person === p)
+      .sort((a, b) => a.date === b.date ? (a.createdAt || 0) - (b.createdAt || 0) : a.date < b.date ? -1 : 1);
+    let prevKg = null;
+    const withDelta = mine.map(e => {
+      const d = e.kg != null && prevKg != null ? e.kg - prevKg : null;
+      if (e.kg != null) prevKg = e.kg;
+      return { ...e, delta: d };
+    }).reverse();
+
+    $("list-" + p).innerHTML = withDelta.length ? withDelta.map(e => {
+      let delta = "";
+      if (e.delta != null && Math.abs(e.delta) >= 0.05) {
+        const down = e.delta < 0;
+        delta = `<span class="delta ${down ? "down" : "up"}">${down ? "▼" : "▲"} ${fmt(Math.abs(e.delta))}</span>`;
+      }
+      return `<div class="entry">
+        <button class="del" type="button" data-id="${esc(e.id)}" aria-label="Obriši">×</button>
+        <div class="date">${showDate(e.date)}</div>
+        ${e.kg != null ? `<div class="kg">${fmt(e.kg)} kg${delta}</div>` : ""}
+        ${e.belly != null ? `<div class="row"><span>Stomak</span><b>${fmt(e.belly)} cm</b></div>` : ""}
+        ${e.chest != null ? `<div class="row"><span>Grudi</span><b>${fmt(e.chest)} cm</b></div>` : ""}
+      </div>`;
+    }).join("") : `<div class="empty">Još nema unosa</div>`;
+  });
+}
+store.subscribe(render, err => {
+  const n = $("notice");
+  n.textContent = "Ne mogu da pročitam bazu (" + (err && err.code || "greška") + "). Proveri Firestore pravila i tajni kod.";
+  n.classList.add("show");
+});
+
+/* ---------- Forma ---------- */
+const dlg = $("dlg");
+let person = null;
+document.querySelectorAll(".add").forEach(b => b.addEventListener("click", () => {
+  person = b.dataset.person;
+  dlg.className = person === "nikola" ? "n" : "m";
+  $("dlgTitle").textContent = (person === "nikola" ? "Nikola" : "Nina") + " – novi unos";
+  $("fDate").value = todayISO();
+  ["fKg", "fBelly", "fChest"].forEach(id => $(id).value = "");
+  $("fErr").textContent = "";
+  dlg.showModal();
+}));
+$("fCancel").addEventListener("click", () => dlg.close());
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const date = $("fDate").value || todayISO();
+  const kg = num($("fKg").value), belly = num($("fBelly").value), chest = num($("fChest").value);
+  if (kg == null && belly == null && chest == null) {
+    $("fErr").textContent = "Unesi bar jednu vrednost.";
+    return;
+  }
+  const entry = { person, date };
+  if (kg != null) entry.kg = kg;
+  if (belly != null) entry.belly = belly;
+  if (chest != null) entry.chest = chest;
+  $("fSave").disabled = true;
+  try {
+    await store.add(entry);
+    dlg.close();
+  } catch (err) {
+    $("fErr").textContent = "Nije sačuvano: " + (err && err.code || "greška");
+  } finally {
+    $("fSave").disabled = false;
+  }
+});
+
+document.addEventListener("click", async e => {
+  const b = e.target.closest(".del");
+  if (!b) return;
+  if (!confirm("Obrisati ovaj unos?")) return;
+  try { await store.remove(b.dataset.id); } catch (err) { alert("Nije obrisano: " + (err && err.code || "greška")); }
+});
+</script>
+</body>
+</html>
