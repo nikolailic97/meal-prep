@@ -315,13 +315,13 @@ const SALAD_KEYS = [
 const RECIPES = {
   piletina: {
     title: "Pečena piletina, pirinač i povrće",
-    ingredients: "1.3 kg pilećeg belog mesa (sirovo) – daje oko 1 kg pečenog za 3 dana, 400g pirinča (sirovo) za 3 dana, oko 1 kg mešanog povrća (brokoli/šargarepa/karfiol), so, biber, slatka paprika, beli luk u prahu",
-    steps: "Piletinu iseći na kockice, začiniti (so, biber, slatka paprika, beli luk u prahu) i peći na tiganju sa par kapi ulja 6–8 min. Pirinač kuvati sa duplo više vode dok ne upije. Zamrznuti brokoli kuvati u ključaloj slanoj vodi 3–4 min. Po obroku: Nikola 180g pečenog mesa + 70g sirovog pirinča, Nina 150g pečenog mesa + 60g sirovog pirinča.",
+    ingredients: "1.3 kg pilećeg belog mesa (sirovo) – daje oko 1 kg pečenog za 3 dana, 400g pirinča (sirovo) za 3 dana, oko 1 kg smrznutog miksa povrća, so, biber, slatka paprika, beli luk u prahu",
+    steps: "Piletinu iseći na kockice, začiniti (so, biber, slatka paprika, beli luk u prahu) i peći na tiganju sa par kapi ulja 6–8 min. Pirinač kuvati sa duplo više vode dok ne upije. Smrznuti miks povrća kuvati u ključaloj slanoj vodi 3–4 min. Po obroku: Nikola 180g pečenog mesa + 70g sirovog pirinča, Nina 150g pečenog mesa + 60g sirovog pirinča.",
   },
   krompir: {
     title: "Meso i krompir",
-    ingredients: "900g nemasnog svinjskog buta ili mlevene junetine (sirovo) – daje oko 660g pečenog za 2 dana, 900g krompira za 2 dana, so, biber, beli luk u prahu, slatka paprika",
-    steps: "Krompir oljuštiti, iseći na kocke ili kriške i kuvati 15–20 min ili peći u rerni na 200°C 30–35 min. Meso začiniti i ispeći na teflonu bez ulja (mleveno ispržiti uz začine). Po obroku: Nikola 180g mesa + 250g krompira, Nina 150g mesa + 200g krompira.",
+    ingredients: "900g nemasnog svinjskog buta ili mlevene junetine (sirovo) – daje oko 660g pečenog za 2 dana, cca 900g smrznutog začinjenog krompira iz Lidla za 2 dana, so, biber, beli luk u prahu, slatka paprika",
+    steps: "Smrznuti začinjeni krompir ispeći u rerni ili air fryer-u prema uputstvu na pakovanju. Meso začiniti i ispeći na teflonu bez ulja (mleveno ispržiti uz začine). Po obroku: Nikola 180g mesa + 250g krompira, Nina 150g mesa + 200g krompira.",
   },
   bolonjeze: {
     title: "Fit Bolonjeze Sos",
@@ -354,9 +354,9 @@ const MEAL = {
   uzB: { name: "Užina (pred podne)", n: "4 pirinčane galete + 4 listića pilećih/ćurećih prsa (cca 50g) + krastavac/paradajz.", m: "2 pirinčane galete + 2 listića pilećih/ćurećih prsa (cca 30g) + krastavac/paradajz." },
   uzC: { name: "Užina (pred podne)", n: "Šaka pečenog neslanog kikirikija ili badema.", m: "Manja šaka badema ili lešnika." },
   slat: { name: "Slatka užina", n: "Nikola (Slatkiš): 100g Milbona/Pilos High Protein pudinga (pola čašice).", m: "Nina (Slatkiš): 100g Milbona/Pilos High Protein pudinga (druga polovina čašice)." },
-  whey: { name: "Odmah nakon treninga", n: "1 merica whey proteina u 250–300ml vode. Ako ne treniraš: popodnevna užina ili u doručak.", m: "1 merica whey proteina u 250–300ml vode. Ako ne trenira: popodnevna užina ili u doručak." },
-  rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + povrće (brokoli/šargarepa/karfiol). (Omega-3: 1 kaps)", m: "150g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)", recipe: "piletina" },
-  rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g kuvanog/pečenog krompira + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g kuvanog/pečenog krompira + kupus salata. (Omega-3: 1 kaps)", recipe: "krompir" },
+  whey: { name: "Odmah nakon treninga", n: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne treniraš: popodnevna užina ili u doručak.", m: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne trenira: popodnevna užina ili u doručak." },
+  rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + smrznuti miks povrća. (Omega-3: 1 kaps)", m: "150g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)", recipe: "piletina" },
+  rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", recipe: "krompir" },
   rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)", recipe: "bolonjeze" },
   vecA: { name: "Večera", n: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kašika maslinovog ulja. (Omega-3: 1 kaps)", m: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kašika maslinovog ulja. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   vecB: { name: "Večera", n: "3 kuvana jaja + 50g nemasnog/feta sira + paradajz/krastavac. (Omega-3: 1 kaps)", m: "2 kuvana jaja + 30g nemasnog/feta sira + paradajz/krastavac. (Omega-3: opciono 1 kaps posle napornog treninga)" },
@@ -366,7 +366,7 @@ const MEAL = {
 
 // index = Date.getDay(): 0 = nedelja
 const DAYS = [
-  { name: "Nedelja",    meals: ["dorC", "uzC", "slat", "whey", "rucC", "vecA", "mg"] },
+  { name: "Nedelja",    meals: ["dorC", "uzA", "slat", "whey", "rucC", "vecA", "mg"] },
   { name: "Ponedeljak", meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
   { name: "Utorak",     meals: ["dorB", "uzB", "whey", "rucB", "vecB", "mg"] },
   { name: "Sreda",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
@@ -493,8 +493,7 @@ const SHOP = {
         ["Paradajz (za salate)", "cca 1 kg", "Čeri paradajz"],
         ["Krastavac (za salate)", "2 komada", "Sveža zelena paprika"],
         ["Limun", "1 kg", "Limunov sok iz flašice ili jabukovo sirće"],
-        ["Krompir (za ručak u četvrtak)", "cca 500g", "Batat"],
-        ["Banane", "2 komada", "Jabuke"],
+        ["Banane", "5 komada", "Jabuke"],
         ["Jabuke", "1 komad", "Šaka jagoda"],
         ["Crni luk i beli luk", "po 1 mrežica/pakovanje", "Granule belog/crnog luka iz kesice"],
       ]],
@@ -522,7 +521,8 @@ const SHOP = {
       ["7 · Smrznuto", [
         ["Smrznute maline, Freshona", "1 pakovanje od 500g", "Freshona smrznuto šumsko voće"],
         ["Smrznuti kukuruz šećerac, Freshona", "1 kesa (Nina, ručak u petak: 100g, ostatak za ponedeljak i sredu)", "Kukuruz šećerac u konzervi bez šećera, dobro oceđen"],
-        ["Smrznuti brokoli, Freshona", "1 kesa", "Freshona smrznuti karfiol i brokoli miks"],
+        ["Smrznuti miks povrća, Freshona", "1 kesa", "Bilo koji smrznuti miks povrća"],
+        ["Smrznuti začinjeni krompir, Lidl", "cca 500g (ručak u četvrtak)", "Bilo koji smrznuti začinjeni krompir"],
       ]],
       ["8 · Jaja", [
         ["Sveža jaja (M ili L), Lidl", "1–2 pakovanja od 10 komada (treba ~11 kom)", "Bilo koja jaja istog pakovanja"],
@@ -545,8 +545,7 @@ const SHOP = {
         ["Svež kupus (za salate)", "1 manja glavica, cca 1 kg", "Gotova mešana salata u kesi iz frižidera"],
         ["Paradajz (za salate)", "cca 1 kg", "Čeri paradajz"],
         ["Krastavac (za salate)", "3 komada", "Sveža zelena paprika"],
-        ["Krompir (za ručak u utorak)", "cca 500g", "Batat"],
-        ["Banane", "3 komada", "Jabuke"],
+        ["Banane", "8 komada", "Jabuke"],
         ["Jabuke", "2 komada", "Šaka jagoda"],
       ]],
       ["3 · Suva hrana", [
@@ -565,7 +564,8 @@ const SHOP = {
         ["Tunjevina u komadima u sopstvenom soku, Nixe", "6 konzervi (nedelja, ponedeljak i sreda)", "Nixe komadi u suncokretovom ulju, uz obavezno snažno ceđenje"],
       ]],
       ["7 · Smrznuto", [
-        ["Smrznuti brokoli, Freshona", "1 kesa", "Freshona smrznuti karfiol i brokoli miks"],
+        ["Smrznuti miks povrća, Freshona", "1 kesa", "Bilo koji smrznuti miks povrća"],
+        ["Smrznuti začinjeni krompir, Lidl", "cca 500g (ručak u utorak)", "Bilo koji smrznuti začinjeni krompir"],
         ["Smrznute maline, Freshona", "1 pakovanje, zavisno od zaliha u zamrzivaču", "Freshona smrznuto šumsko voće"],
         ["Smrznuti kukuruz šećerac, Freshona", "cca 200g (Nina, ručak u ponedeljak i sredu), samo ako nije ostalo od četvrtka", "Kukuruz šećerac u konzervi bez šećera, dobro oceđen"],
       ]],
