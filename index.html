@@ -371,7 +371,7 @@ const DAYS = [
   { name: "Sreda",      meals: ["dorA", "uzA", "whey", "rucA", "vecA", "mg"] },
   { name: "Četvrtak",   meals: ["dorB", "uzB", "whey", "rucB", "vecB", "mg"] },
   { name: "Petak",      meals: ["dorA", "uzA", "whey", "rucA", "vecA", "mg"] },
-  { name: "Subota",     meals: ["dorC", "uzC", "whey", "rucC", "vecSub", "mg"] },
+  { name: "Subota",     meals: ["dorB", "uzC", "whey", "rucC", "vecSub", "mg"] },
 ];
 
 /* ---------- Kalkulator ---------- */
@@ -404,8 +404,8 @@ const RECIPE_ORDER = [
   ["krompir", "Ručak: utorak, četvrtak"],
   ["bolonjeze", "Ručak: subota, nedelja"],
   ["omlet", "Doručak: ponedeljak, sreda, petak"],
-  ["kasa", "Doručak: utorak, četvrtak"],
-  ["omletC", "Doručak: subota, nedelja"],
+  ["kasa", "Doručak: utorak, četvrtak, subota"],
+  ["omletC", "Doručak: nedelja"],
 ];
 function splitSteps(s) {
   return s.split(/(?<=\.)\s+/).filter(Boolean);
@@ -488,7 +488,6 @@ const SHOP = {
       ["2 · Voće i povrće", [
         ["Sveža paprika (za omlete)", "2 komada", "Tikvice"],
         ["Spanać (za omlet)", "1 manja kesa, cca 100g", "Smrznuti spanać"],
-        ["Šampinjoni (za vikend omlet)", "150g", "Smrznuti šampinjoni"],
         ["Svež kupus (za salate)", "1 manja glavica, cca 1 kg", "Gotova mešana salata u kesi iz frižidera"],
         ["Paradajz (za salate)", "cca 1 kg", "Čeri paradajz"],
         ["Krastavac (za salate)", "2 komada", "Sveža zelena paprika"],
@@ -499,7 +498,7 @@ const SHOP = {
         ["Crni luk i beli luk", "po 1 mrežica/pakovanje", "Granule belog/crnog luka iz kesice"],
       ]],
       ["3 · Suva hrana", [
-        ["Sitne ovsene pahuljice, Crownfield", "1 pakovanje od 500g (troši se do srede)", "Bilo koje sitne ovsene pahuljice bez dodataka"],
+        ["Sitne ovsene pahuljice, Crownfield", "1 pakovanje od 500g (četvrtak, subota, utorak)", "Bilo koje sitne ovsene pahuljice bez dodataka"],
         ["Integralni tost hleb, Taste of America Whole Grain", "1 pakovanje (troši se do srede)", "Rivercote integralni hleb u kesi"],
         ["Pirinčane galete (obične ili sa susamom), Sondey", "1–2 pakovanja (treba ~12 do subote: četvrtak 6 + subota 6)", "Sondey kukuruzne galete"],
       ]],
@@ -520,7 +519,7 @@ const SHOP = {
         ["Smrznuti brokoli, Freshona", "1 kesa", "Freshona smrznuti karfiol i brokoli miks"],
       ]],
       ["8 · Jaja", [
-        ["Sveža jaja (M ili L), Lidl", "2 pakovanja od 10 komada (treba ~17 kom)", "Bilo koja jaja istog pakovanja"],
+        ["Sveža jaja (M ili L), Lidl", "1–2 pakovanja od 10 komada (treba ~10 kom)", "Bilo koja jaja istog pakovanja"],
       ]],
       ["9 · Testenina, pirinač i pasirani paradajz", [
         ["Beli ili Jasmin pirinač, Golden Sun / Combino", "1 pakovanje od 500g (troši se do srede)", "Bilo koji beli pirinač"],
