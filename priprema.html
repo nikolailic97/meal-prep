@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f7cff">
+<title>Priprema hrane</title>
+<style>
+  :root {
+    --bg: #f6f7fc;
+    --card: #ffffff;
+    --text: #1f2540;
+    --muted: #6b7290;
+    --line: #e8eaf4;
+    --blue: #3b6cf5;
+    --blue-soft: #e8efff;
+    --blue-dark: #2549c4;
+    --pink: #ec4899;
+    --pink-soft: #ffe9f3;
+    --radius: 20px;
+    --shadow: 0 6px 24px rgba(40, 55, 120, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12142a;
+      --card: #1c1f3b;
+      --text: #eef0ff;
+      --muted: #9aa0c4;
+      --line: #2b2f52;
+      --blue: #6e93ff;
+      --blue-soft: #1f2d5e;
+      --blue-dark: #a9c0ff;
+      --pink: #ff6fb5;
+      --pink-soft: #4a1d3b;
+      --shadow: 0 6px 24px rgba(0, 0, 0, .3);
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.45;
+    padding: 0 16px calc(40px + env(safe-area-inset-bottom));
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+
+  header { padding: calc(24px + env(safe-area-inset-top)) 4px 18px; text-align: center; }
+  header h1 {
+    margin: 0; font-size: 2rem; letter-spacing: -.5px;
+    background: linear-gradient(90deg, var(--blue), var(--pink));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: .95rem; }
+  .back { display: inline-block; margin-bottom: 8px; color: var(--muted); font-size: .9rem; font-weight: 600; text-decoration: none; }
+
+  .card {
+    background: var(--card); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 20px; margin-bottom: 18px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 1.2rem; }
+  .card .sub { margin: 0 0 6px; color: var(--muted); font-size: .9rem; }
+  .section-title { margin: 26px 4px 12px; font-size: 1.1rem; color: var(--muted); font-weight: 700; }
+  .chev { transition: transform .2s; color: var(--muted); }
+  details[open] > summary .chev { transform: rotate(180deg); }
+
+  /* Tabovi */
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--card); padding: 6px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .tab { border: 0; background: transparent; color: var(--muted); font-weight: 700; font-size: 1rem; padding: 12px; border-radius: 12px; cursor: pointer; }
+  .tab.active { color: #fff; background: linear-gradient(90deg, var(--blue), var(--pink)); box-shadow: 0 4px 12px rgba(120, 80, 200, .25); }
+
+  /* Koraci pripreme */
+  .task { padding: 0; overflow: hidden; }
+  .task > summary {
+    list-style: none; cursor: pointer; padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .task > summary::-webkit-details-marker { display: none; }
+  .task .head { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .task .num {
+    flex: none; width: 30px; height: 30px; border-radius: 50%; color: #fff; font-size: .9rem; font-weight: 700;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--blue), var(--pink));
+  }
+  .task .ttl { font-weight: 700; font-size: 1.02rem; }
+  .task .cov { display: block; color: var(--muted); font-size: .8rem; font-weight: 600; }
+  .task-body { padding: 0 20px 18px; font-size: .92rem; }
+  .task-body h4 { margin: 12px 0 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
+  .task-body ul, .task-body ol { margin: 0; padding-left: 20px; }
+  .task-body li { margin: 4px 0; }
+  .portions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .p { border-radius: 14px; padding: 10px 12px; font-size: .88rem; }
+  .p b { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 2px; }
+  .p.n { background: var(--blue-soft); } .p.n b { color: var(--blue); }
+  .p.m { background: var(--pink-soft); } .p.m b { color: var(--pink); }
+  .fresh { margin: 0 0 14px; padding: 12px 14px; border-radius: 14px; background: var(--card); box-shadow: var(--shadow); font-size: .88rem; }
+  .fresh b { display: block; margin-bottom: 4px; }
+  .fresh ul { margin: 0; padding-left: 20px; }
+
+  /* Recepti */
+  .recipes { padding: 6px 20px; }
+  .recipe { border-bottom: 1px solid var(--line); }
+  .recipe:last-child { border-bottom: 0; }
+  .recipe summary {
+    list-style: none; cursor: pointer; padding: 14px 0; font-weight: 700;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .recipe summary::-webkit-details-marker { display: none; }
+  .recipe summary .num {
+    flex: none; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-size: .85rem;
+    display: grid; place-items: center; margin-right: 10px;
+    background: linear-gradient(135deg, var(--blue), var(--pink));
+  }
+  .recipe summary .t { flex: 1; display: flex; align-items: center; }
+  .recipe-body { padding: 0 0 16px; font-size: .92rem; }
+  .recipe-body h4 { margin: 12px 0 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
+  .recipe-body ul, .recipe-body ol { margin: 0; padding-left: 20px; }
+  .recipe-body li { margin: 4px 0; }
+  .recipe-body .for { margin-top: 12px; font-size: .82rem; color: var(--muted); }
+  @media (max-width: 380px) { .portions { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← Meal Prep</a>
+    <h1>Priprema hrane</h1>
+    <p>Šta i kako spremaš u četvrtak i u nedelju</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" type="button" role="tab" data-list="cetvrtak">Četvrtak</button>
+    <button class="tab" type="button" role="tab" data-list="nedelja">Nedelja</button>
+  </div>
+
+  <section class="card">
+    <h2 id="prepTitle"></h2>
+    <p class="sub" id="prepSub"></p>
+  </section>
+  <div id="prepList"></div>
+  <div id="prepFresh"></div>
+
+  <div class="section-title" id="recepti">Recepti</div>
+  <section class="card recipes" aria-label="Recepti">
+    <div id="recipeList"></div>
+  </section>
+
+</div>
+
+<script>
+/* ---------- Recepti ---------- */
+const RECIPES = {
+  piletina: {
+    title: "Pečena piletina, pirinač i povrće",
+    ingredients: "1.3 kg pilećeg belog mesa (sirovo) – daje oko 1 kg pečenog za 3 dana, 400g pirinča (sirovo) za 3 dana, oko 1 kg smrznutog miksa povrća, so, biber, slatka paprika, beli luk u prahu",
+    steps: "Piletinu iseći na kockice, začiniti (so, biber, slatka paprika, beli luk u prahu) i peći na tiganju sa par kapi ulja 6–8 min. Pirinač kuvati sa duplo više vode dok ne upije. Smrznuti miks povrća kuvati u ključaloj slanoj vodi 3–4 min. Po obroku: Nikola 180g pečenog mesa + 70g sirovog pirinča, Nina 150g pečenog mesa + 60g sirovog pirinča.",
+  },
+  krompir: {
+    title: "Meso i krompir",
+    ingredients: "900g nemasnog svinjskog buta ili mlevene junetine (sirovo) – daje oko 660g pečenog za 2 dana, cca 900g smrznutog začinjenog krompira iz Lidla za 2 dana, so, biber, beli luk u prahu, slatka paprika",
+    steps: "Smrznuti začinjeni krompir ispeći u rerni ili air fryer-u prema uputstvu na pakovanju. Meso začiniti i ispeći na teflonu bez ulja (mleveno ispržiti uz začine). Po obroku: Nikola 180g mesa + 250g krompira, Nina 150g mesa + 200g krompira.",
+  },
+  bolonjeze: {
+    title: "Fit Bolonjeze Sos",
+    ingredients: "660g junećeg mlevenog mesa (nemasnog) za 2 dana, 300g tjestenine (sirovo) za 2 dana, 1 crni luk, 2 čena belog luka, 1–2 pelata Combino, so, biber, origano, bosiljak",
+    steps: "Propržiti luk na par kapi maslinovog ulja. Dodati meso, mešati dok ne porumeni. Dodati začine, preliti pelatom i krčkati 20–25 min. Tjesteninu skuvati odvojeno. Po obroku: Nikola 180g mesa + 80g sirove tjestenine, Nina 150g mesa + 70g sirove tjestenine.",
+  },
+  omlet: {
+    title: "Omlet sa povrćem",
+    ingredients: "Za 1 dan: 6 jaja (Nikola 3 + Nina 3), 150g paprike (Nikola 75g + Nina 75g, oko 1 paprika), pola crnog luka, 2 kriške integralnog hleba. Za 3 dana: 18 jaja, 450g paprike (3 paprike), 1.5 crni luk, 6 kriški hleba",
+    steps: "Papriku i luk iseckati i propržiti 2–3 min. Umutiti jaja sa prstohvatom soli i preliti preko povrća. Peći sa obe strane. Nikola 3 jaja + 75g paprike + 1 kriška hleba, Nina 3 jaja + 75g paprike + 1 kriška hleba.",
+  },
+  omletC: {
+    title: "Omlet sa šampinjonima",
+    ingredients: "Za 1 dan: 6–7 jaja (Nikola 3–4 + Nina 3), 150g šampinjona (Nikola 80g + Nina 70g), 75g paprike (Nikola 40g + Nina 35g), pola crnog luka, 2–3 kriške integralnog hleba. Za 2 dana: 12–14 jaja, 300g šampinjona, 150g paprike, 1 crni luk, 4–6 kriški hleba",
+    steps: "Šampinjone iseći na listiće i pržiti na jakoj vatri 4–5 min dok ne upiju vodu. Dodati papriku i luk još 2 min. Umutiti jaja sa prstohvatom soli, preliti i peći sa obe strane. Nikola 3–4 jaja + 80g šampinjona + 40g paprike + 1–2 kriške hleba, Nina 3 jaja + 70g šampinjona + 35g paprike + 1 kriška hleba.",
+  },
+  kasa: {
+    title: "Ovsena kaša",
+    ingredients: "Za 1 dan: 100g ovsenih pahuljica (Nikola 60g + Nina 40g), 350ml vode (Nikola 200ml + Nina 150ml), 1/2 banane za Nikolu, šaka bobičastog voća za Ninu, cimet ili kakao. Za 2 dana: 200g pahuljica, 1 banana, 2 šake bobičastog voća",
+    steps: "Pahuljice kuvati u vodi 3–5 min uz mešanje. Dodati cimet (Nikola može i kakao). Nikola: dodati pola banane. Nina: dodati šaku bobičastog voća.",
+  },
+};
+
+// redosled i "kada se koristi" za sekciju Recepti
+const RECIPE_ORDER = [
+  ["piletina", "Ručak: ponedeljak, sreda, petak"],
+  ["krompir", "Ručak: utorak, četvrtak"],
+  ["bolonjeze", "Ručak: subota, nedelja"],
+  ["omlet", "Doručak: ponedeljak, sreda, petak"],
+  ["kasa", "Doručak: utorak, četvrtak, subota"],
+  ["omletC", "Doručak: nedelja"],
+];
+
+/* ---------- Plan pripreme ---------- */
+// task: title, cov (za koje dane), items (šta tačno), n/m (porcije po obroku), recipe (ključ iz RECIPES)
+const PREP = {
+  cetvrtak: {
+    title: "Priprema u četvrtak",
+    sub: "Posle kupovine spremaš za četvrtak, petak i subotu. Radi ovim redosledom – dok se jedno peče, seci i kuvaj sledeće.",
+    tasks: [
+      {
+        title: "Meso i krompir", cov: "Ručak: četvrtak (1 dan)", recipe: "krompir",
+        items: [
+          "450g sirovog mlevenog junetine ili svinjskog buta – daje oko 330g pečenog",
+          "cca 450g smrznutog začinjenog krompira (ceo ovaj ručak)",
+          "Začini: so, biber, beli luk u prahu, slatka paprika",
+        ],
+        n: "180g mesa + 250g krompira + kupus salata",
+        m: "150g mesa + 200g krompira + kupus salata",
+      },
+      {
+        title: "Piletina, pirinač i povrće", cov: "Ručak: petak (1 dan)", recipe: "piletina",
+        items: [
+          "cca 450g sirovog pilećeg belog mesa – daje oko 330g pečenog",
+          "130g sirovog pirinča (Nikola 70g + Nina 60g)",
+          "Smrznuti miks povrća (Nikola) i 100g smrznutog kukuruza šećerca (Nina)",
+        ],
+        n: "180g mesa + 70g sirovog pirinča + miks povrća",
+        m: "150g mesa + 60g sirovog pirinča + 80–100g kukuruza",
+      },
+      {
+        title: "Bolonjeze sos", cov: "Ručak: subota i nedelja (2 dana)", recipe: "bolonjeze",
+        items: [
+          "660g mlevenog junećeg mesa (nemasnog)",
+          "300g tjestenine (sirovo) – kuvaj posebno, sa sosom ide tek kad podgrevaš",
+          "1 crni luk, 2 čena belog luka, 1–2 pelata, origano, bosiljak",
+          "Sos je dovoljan za oba dana – nedeljni deo odmah u frižider u posebnu posudu",
+        ],
+        n: "180g mesa u sosu + 80g sirove tjestenine",
+        m: "150g mesa u sosu + 70g sirove tjestenine",
+      },
+    ],
+    fresh: {
+      title: "Spremaš svež taj dan (ne unapred)",
+      items: [
+        "Četvrtak doručak: ovsena kaša",
+        "Petak doručak: omlet sa povrćem (6 jaja + 150g paprike)",
+        "Subota doručak: ovsena kaša",
+        "Užine i večere (tunjevina, jaja, galete, jogurt) ne traže kuvanje",
+      ],
+    },
+  },
+  nedelja: {
+    title: "Priprema u nedelju",
+    sub: "Posle kupovine spremaš za ponedeljak, utorak i sredu. Ručak u nedelju je bolonjeze koji je ostao od četvrtka.",
+    tasks: [
+      {
+        title: "Piletina, pirinač i povrće", cov: "Ručak: ponedeljak i sreda (2 dana)", recipe: "piletina",
+        items: [
+          "cca 900g sirovog pilećeg belog mesa – daje oko 660g pečenog",
+          "260g sirovog pirinča (Nikola 140g + Nina 120g)",
+          "1 kesa smrznutog miksa povrća (Nikola) + cca 200g kukuruza šećerca (Nina)",
+          "Podeli u dve posude – jedna za ponedeljak, jedna za sredu",
+        ],
+        n: "180g mesa + 70g sirovog pirinča + miks povrća",
+        m: "150g mesa + 60g sirovog pirinča + 80–100g kukuruza",
+      },
+      {
+        title: "Meso i krompir", cov: "Ručak: utorak (1 dan)", recipe: "krompir",
+        items: [
+          "450g sirovog mlevenog junetine ili svinjskog buta – daje oko 330g pečenog",
+          "cca 450g smrznutog začinjenog krompira",
+          "Začini: so, biber, beli luk u prahu, slatka paprika",
+        ],
+        n: "180g mesa + 250g krompira + kupus salata",
+        m: "150g mesa + 200g krompira + kupus salata",
+      },
+    ],
+    fresh: {
+      title: "Spremaš svež taj dan (ne unapred)",
+      items: [
+        "Nedelja doručak: omlet sa šampinjonima",
+        "Ponedeljak i sreda doručak: omlet sa povrćem (6 jaja + 150g paprike)",
+        "Utorak doručak: ovsena kaša",
+        "Večere (tunjevina, jaja, galete) i užine ne traže kuvanje",
+      ],
+    },
+  },
+};
+
+/* ---------- Render ---------- */
+const $ = id => document.getElementById(id);
+const list = s => s.replace(/\.$/, "").split(/,\s*/).map(x => `<li>${x}</li>`).join("");
+const splitSteps = s => s.split(/(?<=\.)\s+/).filter(Boolean);
+
+$("recipeList").innerHTML = RECIPE_ORDER.map(([key, when], i) => {
+  const r = RECIPES[key];
+  let body = `<h4>Sastojci</h4><ul>${list(r.ingredients)}</ul>`;
+  body += `<h4>Priprema</h4><ol>` + splitSteps(r.steps).map(x => `<li>${x}</li>`).join("") + `</ol>`;
+  body += `<div class="for">${when}</div>`;
+  return `<details class="recipe" id="r-${key}">
+    <summary><span class="t"><span class="num">${i + 1}</span>${r.title}</span><span class="chev">▼</span></summary>
+    <div class="recipe-body">${body}</div></details>`;
+}).join("");
+
+function renderPrep(key) {
+  const P = PREP[key];
+  $("prepTitle").textContent = P.title;
+  $("prepSub").textContent = P.sub;
+  $("prepList").innerHTML = P.tasks.map((t, i) => {
+    const r = RECIPES[t.recipe];
+    const steps = splitSteps(r.steps).filter(s => !/^Po obroku/.test(s)).map(x => `<li>${x}</li>`).join("");
+    return `<details class="card task" ${i === 0 ? "open" : ""}>
+      <summary>
+        <span class="head"><span class="num">${i + 1}</span><span><span class="ttl">${t.title}</span><span class="cov">${t.cov}</span></span></span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="task-body">
+        <h4>Šta ti treba</h4><ul>${t.items.map(x => `<li>${x}</li>`).join("")}</ul>
+        <h4>Kako</h4><ol>${steps}</ol>
+        <h4>Po obroku</h4>
+        <div class="portions">
+          <div class="p n"><b>Nikola</b>${t.n}</div>
+          <div class="p m"><b>Nina</b>${t.m}</div>
+        </div>
+      </div>
+    </details>`;
+  }).join("");
+  $("prepFresh").innerHTML = `<div class="fresh"><b>${P.fresh.title}</b><ul>` +
+    P.fresh.items.map(x => `<li>${x}</li>`).join("") + `</ul></div>`;
+}
+
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t));
+  renderPrep(t.dataset.list);
+}));
+
+// četvrtak–subota otvori četvrtak, nedelja–sreda nedelju
+let start = "cetvrtak";
+if ([0, 1, 2, 3].includes(new Date().getDay())) {
+  start = "nedelja";
+  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.list === start));
+}
+renderPrep(start);
+</script>
+</body>
+</html>

@@ -178,26 +178,6 @@
   .info-panel p { margin: 4px 0; }
   .info-panel .tag { font-weight: 700; }
   .info-panel .salad { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
-  /* Priprema */
-  .recipes { padding: 6px 20px; }
-  .recipe { border-bottom: 1px solid var(--line); }
-  .recipe:last-child { border-bottom: 0; }
-  .recipe summary {
-    list-style: none; cursor: pointer; padding: 14px 0; font-weight: 700;
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  }
-  .recipe summary::-webkit-details-marker { display: none; }
-  .recipe summary .num {
-    flex: none; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-size: .85rem;
-    display: grid; place-items: center; margin-right: 10px;
-    background: linear-gradient(135deg, var(--blue), var(--pink));
-  }
-  .recipe summary .t { flex: 1; display: flex; align-items: center; }
-  .recipe-body { padding: 0 0 16px; font-size: .92rem; }
-  .recipe-body h4 { margin: 12px 0 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
-  .recipe-body ul, .recipe-body ol { margin: 0; padding-left: 20px; }
-  .recipe-body li { margin: 4px 0; }
-  .recipe-body .for { margin-top: 12px; font-size: .82rem; color: var(--muted); }
   /* Kupovina */
   .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--card); padding: 6px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
   .tab { border: 0; background: transparent; color: var(--muted); font-weight: 700; font-size: 1rem; padding: 12px; border-radius: 12px; cursor: pointer; }
@@ -233,6 +213,7 @@
     <h1>Meal Prep</h1>
     <p>Nikola &amp; Nina · plan ishrane i kalkulator porcija</p>
     <p style="margin-top:10px"><a href="napredak.html" style="color:var(--blue);font-weight:700;text-decoration:none">📈 Napredak (težina i obimi) →</a></p>
+    <p style="margin-top:6px"><a href="priprema.html" style="color:var(--pink);font-weight:700;text-decoration:none">🍳 Priprema hrane (četvrtak i nedelja) →</a></p>
   </header>
 
   <!-- Kalkulator -->
@@ -273,11 +254,6 @@
     <div class="free"><strong>Slobodni dodaci:</strong> sok od limuna, jabukovo sirće, so i biber – bez kalorija, neograničeno.</div>
   </details>
 
-  <div class="section-title" id="priprema">Priprema</div>
-  <section class="card recipes" aria-label="Priprema">
-    <div id="recipeList"></div>
-  </section>
-
   <div class="section-title">Plan ishrane</div>
   <div id="days"></div>
 
@@ -312,52 +288,19 @@ const SALAD_KEYS = [
   { re: /salata/i, i: 3 },
 ];
 
-const RECIPES = {
-  piletina: {
-    title: "Pečena piletina, pirinač i povrće",
-    ingredients: "1.3 kg pilećeg belog mesa (sirovo) – daje oko 1 kg pečenog za 3 dana, 400g pirinča (sirovo) za 3 dana, oko 1 kg smrznutog miksa povrća, so, biber, slatka paprika, beli luk u prahu",
-    steps: "Piletinu iseći na kockice, začiniti (so, biber, slatka paprika, beli luk u prahu) i peći na tiganju sa par kapi ulja 6–8 min. Pirinač kuvati sa duplo više vode dok ne upije. Smrznuti miks povrća kuvati u ključaloj slanoj vodi 3–4 min. Po obroku: Nikola 180g pečenog mesa + 70g sirovog pirinča, Nina 150g pečenog mesa + 60g sirovog pirinča.",
-  },
-  krompir: {
-    title: "Meso i krompir",
-    ingredients: "900g nemasnog svinjskog buta ili mlevene junetine (sirovo) – daje oko 660g pečenog za 2 dana, cca 900g smrznutog začinjenog krompira iz Lidla za 2 dana, so, biber, beli luk u prahu, slatka paprika",
-    steps: "Smrznuti začinjeni krompir ispeći u rerni ili air fryer-u prema uputstvu na pakovanju. Meso začiniti i ispeći na teflonu bez ulja (mleveno ispržiti uz začine). Po obroku: Nikola 180g mesa + 250g krompira, Nina 150g mesa + 200g krompira.",
-  },
-  bolonjeze: {
-    title: "Fit Bolonjeze Sos",
-    ingredients: "660g junećeg mlevenog mesa (nemasnog) za 2 dana, 300g tjestenine (sirovo) za 2 dana, 1 crni luk, 2 čena belog luka, 1–2 pelata Combino, so, biber, origano, bosiljak",
-    steps: "Propržiti luk na par kapi maslinovog ulja. Dodati meso, mešati dok ne porumeni. Dodati začine, preliti pelatom i krčkati 20–25 min. Tjesteninu skuvati odvojeno. Po obroku: Nikola 180g mesa + 80g sirove tjestenine, Nina 150g mesa + 70g sirove tjestenine.",
-  },
-  omlet: {
-    title: "Omlet sa povrćem",
-    ingredients: "Za 1 dan: 6 jaja (Nikola 3 + Nina 3), 150g paprike (Nikola 75g + Nina 75g, oko 1 paprika), pola crnog luka, 2 kriške integralnog hleba. Za 3 dana: 18 jaja, 450g paprike (3 paprike), 1.5 crni luk, 6 kriški hleba",
-    steps: "Papriku i luk iseckati i propržiti 2–3 min. Umutiti jaja sa prstohvatom soli i preliti preko povrća. Peći sa obe strane. Nikola 3 jaja + 75g paprike + 1 kriška hleba, Nina 3 jaja + 75g paprike + 1 kriška hleba.",
-  },
-  omletC: {
-    title: "Omlet sa šampinjonima",
-    ingredients: "Za 1 dan: 6–7 jaja (Nikola 3–4 + Nina 3), 150g šampinjona (Nikola 80g + Nina 70g), 75g paprike (Nikola 40g + Nina 35g), pola crnog luka, 2–3 kriške integralnog hleba. Za 2 dana: 12–14 jaja, 300g šampinjona, 150g paprike, 1 crni luk, 4–6 kriški hleba",
-    steps: "Šampinjone iseći na listiće i pržiti na jakoj vatri 4–5 min dok ne upiju vodu. Dodati papriku i luk još 2 min. Umutiti jaja sa prstohvatom soli, preliti i peći sa obe strane. Nikola 3–4 jaja + 80g šampinjona + 40g paprike + 1–2 kriške hleba, Nina 3 jaja + 70g šampinjona + 35g paprike + 1 kriška hleba.",
-  },
-  kasa: {
-    title: "Ovsena kaša",
-    ingredients: "Za 1 dan: 100g ovsenih pahuljica (Nikola 60g + Nina 40g), 350ml vode (Nikola 200ml + Nina 150ml), 1/2 banane za Nikolu, šaka bobičastog voća za Ninu, cimet ili kakao. Za 2 dana: 200g pahuljica, 1 banana, 2 šake bobičastog voća",
-    steps: "Pahuljice kuvati u vodi 3–5 min uz mešanje. Dodati cimet (Nikola može i kakao). Nikola: dodati pola banane. Nina: dodati šaku bobičastog voća.",
-  },
-};
-
 // obroci (n = Nikola, m = Nina, both = isti tekst za oboje)
 const MEAL = {
-  dorA: { name: "Doručak", n: "Omlet od 3 jaja sa 75g paprike i lukom + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 75g paprike i lukom + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)", recipe: "omlet" },
-  dorB: { name: "Doručak", n: "Zobene pahuljice u vodi (60g) + pola banane + cimet/kakao po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)", m: "Zobene pahuljice u vodi (40g) + šaka bobičastog voća + cimet po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)", recipe: "kasa" },
-  dorC: { name: "Doručak", n: "Omlet od 3–4 jaja sa 80g šampinjona i 40g paprike + 1–2 kriške integralnog hleba. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 70g šampinjona i 35g paprike + 1 kriška integralnog hleba. (Mivolis A-Z: 1 tab)", recipe: "omletC" },
+  dorA: { name: "Doručak", n: "Omlet od 3 jaja sa 75g paprike i lukom + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 75g paprike i lukom + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)" },
+  dorB: { name: "Doručak", n: "Zobene pahuljice u vodi (60g) + pola banane + cimet/kakao po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)", m: "Zobene pahuljice u vodi (40g) + šaka bobičastog voća + cimet po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)" },
+  dorC: { name: "Doručak", n: "Omlet od 3–4 jaja sa 80g šampinjona i 40g paprike + 1–2 kriške integralnog hleba. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 70g šampinjona i 35g paprike + 1 kriška integralnog hleba. (Mivolis A-Z: 1 tab)" },
   uzA: { name: "Užina (pred podne)", n: "150g grčkog jogurta + 1 banana.", m: "200g grčkog jogurta + šaka smrznutih malina." },
   uzB: { name: "Užina (pred podne)", n: "4 pirinčane galete + 4 listića pilećih/ćurećih prsa (cca 50g) + krastavac/paradajz.", m: "2 pirinčane galete + 2 listića pilećih/ćurećih prsa (cca 30g) + krastavac/paradajz." },
   uzC: { name: "Užina (pred podne)", n: "Šaka pečenog neslanog badema.", m: "Manja šaka pečenog neslanog badema." },
   slat: { name: "Slatka užina", n: "Nikola (Slatkiš): 100g Milbona/Pilos High Protein pudinga (pola čašice).", m: "Nina (Slatkiš): 100g Milbona/Pilos High Protein pudinga (druga polovina čašice)." },
   whey: { name: "Odmah nakon treninga", n: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne treniraš: popodnevna užina ili u doručak.", m: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne trenira: popodnevna užina ili u doručak." },
-  rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + smrznuti miks povrća. (Omega-3: 1 kaps)", m: "150g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)", recipe: "piletina" },
-  rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", recipe: "krompir" },
-  rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)", recipe: "bolonjeze" },
+  rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + smrznuti miks povrća. (Omega-3: 1 kaps)", m: "150g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)" },
+  rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)" },
+  rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)" },
   vecA: { name: "Večera", n: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kašika maslinovog ulja. (Omega-3: 1 kaps)", m: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kašika maslinovog ulja. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   vecB: { name: "Večera", n: "3 kuvana jaja + 50g nemasnog/feta sira + paradajz/krastavac. (Omega-3: 1 kaps)", m: "2 kuvana jaja + 30g nemasnog/feta sira + paradajz/krastavac. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   vecSub: { name: "Večera", n: "4 pirinčane galete + 4 listića pilećih/ćurećih prsa (cca 50g) + krastavac/paradajz. (Omega-3: 1 kaps)", m: "2 pirinčane galete + 2 listića pilećih/ćurećih prsa (cca 30g) + krastavac/paradajz." },
@@ -397,33 +340,6 @@ $("calcBtn").addEventListener("click", calculate);
 /* ---------- Pravila ---------- */
 $("measuresBody").innerHTML = SALAD_MEASURES
   .map(r => `<tr><td>${r.name}</td><td>${r.n}</td><td>${r.m}</td></tr>`).join("");
-
-/* ---------- Priprema ---------- */
-// redosled i "kada se koristi" za sekciju Priprema
-const RECIPE_ORDER = [
-  ["piletina", "Ručak: ponedeljak, sreda, petak"],
-  ["krompir", "Ručak: utorak, četvrtak"],
-  ["bolonjeze", "Ručak: subota, nedelja"],
-  ["omlet", "Doručak: ponedeljak, sreda, petak"],
-  ["kasa", "Doručak: utorak, četvrtak, subota"],
-  ["omletC", "Doručak: nedelja"],
-];
-function splitSteps(s) {
-  return s.split(/(?<=\.)\s+/).filter(Boolean);
-}
-$("recipeList").innerHTML = RECIPE_ORDER.map(([key, when], i) => {
-  const r = RECIPES[key];
-  let body = "";
-  if (r.ingredients) {
-    body += `<h4>Sastojci</h4><ul>` +
-      r.ingredients.replace(/\.$/, "").split(/,\s*/).map(x => `<li>${x}</li>`).join("") + `</ul>`;
-  }
-  body += `<h4>Priprema</h4><ol>` + splitSteps(r.steps).map(x => `<li>${x}</li>`).join("") + `</ol>`;
-  body += `<div class="for">${when}</div>`;
-  return `<details class="recipe">
-    <summary><span class="t"><span class="num">${i + 1}</span>${r.title}</span><span class="chev">▼</span></summary>
-    <div class="recipe-body">${body}</div></details>`;
-}).join("");
 
 /* ---------- Plan ---------- */
 function esc(s) { return s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])); }
