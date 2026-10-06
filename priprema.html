@@ -120,13 +120,23 @@
   .recipe-body li { margin: 4px 0; }
   .recipe-body .for { margin-top: 12px; font-size: .82rem; color: var(--muted); }
   @media (max-width: 380px) { .portions { grid-template-columns: 1fr; } }
+  /* Glavni meni */
+  .nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    margin: 0 -16px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+    background: var(--bg); border-bottom: 1px solid var(--line); }
+  .nav a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 700; font-size: .85rem;
+    padding: 10px 4px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+  .nav a.active { color: #fff; background: linear-gradient(90deg, var(--blue), var(--pink)); }
 </style>
 </head>
 <body>
 <div class="wrap">
-
+  <nav class="nav">
+    <a href="index.html">🍽️ Plan</a>
+    <a href="priprema.html" class="active" aria-current="page">🍳 Priprema</a>
+    <a href="napredak.html">📈 Napredak</a>
+  </nav>
   <header>
-    <a class="back" href="index.html">← Meal Prep</a>
     <h1>Priprema hrane</h1>
     <p>Šta i kako spremaš u četvrtak i u nedelju</p>
   </header>
