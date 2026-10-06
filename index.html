@@ -109,22 +109,6 @@
   .error { display: none; margin-top: 12px; color: #d33; font-size: .9rem; text-align: center; }
   .error.show { display: block; }
 
-  /* Rules */
-  .rules { background: var(--amber-soft); border: 1px solid rgba(183,121,31,.25); box-shadow: none; }
-  .rules summary {
-    list-style: none; cursor: pointer; font-weight: 700; font-size: 1.1rem;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  }
-  .rules summary::-webkit-details-marker { display: none; }
-  .chev { transition: transform .2s; color: var(--amber); }
-  details[open] > summary .chev { transform: rotate(180deg); }
-  .rules .intro { font-size: .88rem; color: var(--muted); margin: 10px 0; }
-  table.measures { width: 100%; border-collapse: collapse; font-size: .9rem; }
-  table.measures th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .5px; padding: 6px 4px; }
-  table.measures th.n { color: var(--blue); }
-  table.measures th.m { color: var(--pink); }
-  table.measures td { padding: 8px 4px; border-top: 1px solid rgba(183,121,31,.2); vertical-align: top; }
-  table.measures td:first-child { font-weight: 600; }
   .oil {
     margin-top: 14px; padding: 12px 14px; border-radius: 14px;
     background: var(--card); border-left: 5px solid #e53e3e; font-size: .9rem;
@@ -185,38 +169,13 @@
   .alt-box { margin-top: 8px; padding: 8px 10px; border-radius: 12px; background: var(--amber-soft); }
   .alt-title { font-weight: 700; font-size: .84rem; margin-bottom: 2px; }
   .info-panel .note { margin: 6px 0 0; font-size: .78rem; color: var(--muted); }
-  /* Kupovina */
-  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--card); padding: 6px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
-  .tab { border: 0; background: transparent; color: var(--muted); font-weight: 700; font-size: 1rem; padding: 12px; border-radius: 12px; cursor: pointer; }
-  .tab.active { color: #fff; background: linear-gradient(90deg, var(--blue), var(--pink)); box-shadow: 0 4px 12px rgba(120, 80, 200, .25); }
-  .shop h2 { font-size: 1.15rem; }
-  .progress { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-  .bar { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--blue), var(--pink)); transition: width .25s; }
-  .progress-label { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 4px; font-size: .85rem; color: var(--muted); font-weight: 600; }
-  .reset { border: 0; background: none; color: var(--muted); font-size: .82rem; text-decoration: underline; cursor: pointer; padding: 4px; }
-  .shop-group { margin: 18px 0 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); font-weight: 700; }
-  .item { display: flex; gap: 12px; align-items: flex-start; padding: 11px 4px; border-top: 1px solid var(--line); cursor: pointer; }
-  .item input { position: absolute; opacity: 0; pointer-events: none; }
-  .box {
-    flex: none; width: 24px; height: 24px; border-radius: 8px; border: 2px solid var(--line);
-    display: grid; place-items: center; color: transparent; font-size: .9rem; font-weight: 800; margin-top: 1px;
-    transition: all .15s;
-  }
-  .item input:checked + .box { background: linear-gradient(135deg, var(--blue), var(--pink)); border-color: transparent; color: #fff; }
-  .item input:focus-visible + .box { box-shadow: 0 0 0 3px var(--blue-soft); }
-  .item .txt { flex: 1; font-size: .93rem; }
-  .item .nm { font-weight: 600; }
-  .item .qty { display: block; color: var(--blue); font-weight: 600; font-size: .86rem; }
-  .item .alt { display: block; color: var(--muted); font-size: .8rem; margin-top: 2px; }
-  .item input:checked ~ .txt { opacity: .45; }
-  .item input:checked ~ .txt .nm { text-decoration: line-through; }
   @media (max-width: 380px) { .persons.two { grid-template-columns: 1fr; } }
   /* Glavni meni */
-  .nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  .nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
     margin: 0 -16px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
     background: var(--bg); border-bottom: 1px solid var(--line); }
-  .nav a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 700; font-size: .85rem;
-    padding: 10px 4px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+  .nav a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 700; font-size: .75rem;
+    padding: 10px 2px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
   .nav a.active { color: #fff; background: linear-gradient(90deg, var(--blue), var(--pink)); }
 </style>
 </head>
@@ -225,6 +184,7 @@
   <nav class="nav">
     <a href="index.html" class="active" aria-current="page">🍽️ Plan</a>
     <a href="priprema.html">🍳 Priprema</a>
+    <a href="kupovina.html">🛒 Kupovina</a>
     <a href="napredak.html">📈 Napredak</a>
   </nav>
   <header>
@@ -258,33 +218,11 @@
     </div>
   </section>
 
-  <!-- Pravila -->
-  <details class="card rules" open>
-    <summary><span>🥗 Pravila za salate i ulje</span><span class="chev">▼</span></summary>
-    <p class="intro">Važi svaki put kada u planu piše „salata“, „kupus“, „paradajz“ ili „krastavac“.</p>
-    <table class="measures">
-      <thead><tr><th></th><th class="n">Nikola</th><th class="m">Nina</th></tr></thead>
-      <tbody id="measuresBody"></tbody>
-    </table>
-    <div class="oil"><strong>Ulje – ključno:</strong> Nikola i Nina max 1 kafena kašičica maslinovog ulja (~5g). <strong>Nema sipanja iz flaše odokativno!</strong></div>
-    <div class="free"><strong>Slobodni dodaci:</strong> sok od limuna, jabukovo sirće, so i biber – bez kalorija, neograničeno.</div>
-  </details>
+  <div class="oil"><strong>Ulje – ključno:</strong> Nikola i Nina max 1 kafena kašičica maslinovog ulja (~5g). <strong>Nema sipanja iz flaše odokativno!</strong></div>
+  <div class="free"><strong>Slobodni dodaci:</strong> sok od limuna, jabukovo sirće, so i biber – bez kalorija, neograničeno.</div>
 
   <div class="section-title">Plan ishrane</div>
   <div id="days"></div>
-
-  <div class="section-title" id="kupovina">Kupovina</div>
-  <div class="tabs" role="tablist">
-    <button class="tab active" type="button" role="tab" data-list="cetvrtak">Četvrtak</button>
-    <button class="tab" type="button" role="tab" data-list="nedelja">Nedelja</button>
-  </div>
-  <section class="card shop">
-    <h2 id="shopTitle"></h2>
-    <p class="sub" id="shopSub"></p>
-    <div class="progress"><div class="bar" id="shopBar"></div></div>
-    <div class="progress-label"><span id="shopCount"></span><button class="reset" type="button" id="shopReset">Poništi sve</button></div>
-    <div id="shopList"></div>
-  </section>
 
 </div>
 
@@ -324,9 +262,8 @@ const MEAL = {
 };
 
 // tačne gramaže po obroku (prikazuju se na klik na "Gramaže")
-// pk(who, nikola, nina) bira vrednost za osobu; sal(i, who) uzima meru iz pravila za salate
+// pk(who, nikola, nina) bira vrednost za osobu
 const pk = (w, n, m) => (w === "n" ? n : m);
-const sal = (i, w) => [SALAD_MEASURES[i].name, SALAD_MEASURES[i][w]];
 const PB_NOTE = "Kikiriki puter: samo 100% kikiriki, bez šećera. Meri na kuhinjskoj vagi, ne odokativno.";
 const OIL = "1 kafena kašičica (~5g)";
 const ITEMS = {
@@ -341,24 +278,16 @@ const ITEMS = {
     ["Grčki jogurt", pk(w, "150g", "200g")],
     w === "n" ? ["Banana", "1 manja/srednja (cca 100g oljuštene)"] : ["Smrznute maline", "šaka (cca 80g)"] ] }),
   uzB: w => ({
-    rows: [
-      ["Pileća/ćureća prsa", pk(w, "4 listića (cca 50g)", "2 listića (cca 30g)")],
-      sal(2, w), ["ili paradajz", pk(w, "150–200g", "100–150g")] ],
+    rows: [["Pileća/ćureća prsa", pk(w, "4 listića (cca 50g)", "2 listića (cca 30g)")]],
     alt: { title: "🥜 Varijanta sa kikiriki puterom (umesto prsa)", rows: [
       ["Kikiriki puter", pk(w, "20g (cca 1 puna kašika)", "10g (cca 1 kafena kašičica)")] ], note: PB_NOTE } }),
   slat: () => ({ rows: [["High Protein puding", "100g (pola čašice od 200g)"]] }),
-  rucB: w => ({ rows: [sal(0, w)] }),
-  vecA: w => ({ rows: [sal(3, w), ["Maslinovo ulje", OIL]] }),
-  vecB: w => ({ rows: [
-    ["Nemasni/feta sir", pk(w, "50g", "30g")],
-    ["Paradajz", pk(w, "150–200g", "100–150g")], ["ili krastavac", pk(w, "150g", "100g")] ] }),
+  vecA: () => ({ rows: [["Maslinovo ulje", OIL]] }),
+  vecB: w => ({ rows: [["Nemasni/feta sir", pk(w, "50g", "30g")]] }),
   vecSub: w => ({
-    rows: [
-      ["Pileća/ćureća prsa", pk(w, "4 listića (cca 50g)", "2 listića (cca 30g)")],
-      ["Krastavac", pk(w, "150g", "100g")], ["ili paradajz", pk(w, "150–200g", "100–150g")] ],
+    rows: [["Pileća/ćureća prsa", pk(w, "4 listića (cca 50g)", "2 listića (cca 30g)")]],
     alt: { title: "🥜 Varijanta sa kikiriki puterom (umesto prsa)", rows: [
-      ["Kikiriki puter", pk(w, "20g (cca 1 puna kašika)", "10g (cca 1 kafena kašičica)")],
-      ["Krastavac ili paradajz", pk(w, "150g", "100g")] ], note: PB_NOTE } }),
+      ["Kikiriki puter", pk(w, "20g (cca 1 puna kašika)", "10g (cca 1 kafena kašičica)")] ], note: PB_NOTE } }),
 };
 
 // index = Date.getDay(): 0 = nedelja
@@ -390,10 +319,6 @@ function calculate() {
 $("calcBtn").addEventListener("click", calculate);
 ["inN", "inM", "inT"].forEach(id =>
   $(id).addEventListener("keydown", e => { if (e.key === "Enter") calculate(); }));
-
-/* ---------- Pravila ---------- */
-$("measuresBody").innerHTML = SALAD_MEASURES
-  .map(r => `<tr><td>${r.name}</td><td>${r.n}</td><td>${r.m}</td></tr>`).join("");
 
 /* ---------- Plan ---------- */
 function esc(s) { return s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])); }
@@ -462,159 +387,6 @@ $("days").addEventListener("click", e => {
   b.setAttribute("aria-expanded", open);
   $(b.getAttribute("aria-controls")).classList.toggle("show", open);
 });
-
-/* ---------- Kupovina ---------- */
-// stavka: [naziv, količina, zamena]
-const SHOP = {
-  cetvrtak: {
-    title: "Kupovina u četvrtak",
-    sub: "Zalihe i prep obroka za četvrtak, petak i subotu (suva hrana ide za celu nedelju do srede). Redosled prati put kroz Lidl.",
-    groups: [
-      ["1 · Orašasti plodovi", [
-        ["Pečeni neslani badem, Alesto", "1 pakovanje od 200g (Nikola i Nina, užina vikendom)", "Alesto pečeni neslani kikiriki ili lešnik"],
-      ]],
-      ["2 · Voće i povrće", [
-        ["Sveža paprika (za omlete)", "2 komada", "Tikvice"],
-        ["Svež kupus (za salate)", "1 manja glavica, cca 1 kg", "Gotova mešana salata u kesi iz frižidera"],
-        ["Paradajz (za salate)", "cca 1 kg", "Čeri paradajz"],
-        ["Krastavac (za salate)", "2 komada", "Sveža zelena paprika"],
-        ["Limun", "1 kg", "Limunov sok iz flašice ili jabukovo sirće"],
-        ["Banane", "5 komada", "Bilo koje zrele banane"],
-        ["Crni luk i beli luk", "po 1 mrežica/pakovanje", "Granule belog/crnog luka iz kesice"],
-      ]],
-      ["3 · Suva hrana", [
-        ["Sitne ovsene pahuljice, Crownfield", "1 pakovanje od 500g (četvrtak, subota, utorak)", "Bilo koje sitne ovsene pahuljice bez dodataka"],
-        ["Integralni tost hleb, Taste of America Whole Grain", "1 pakovanje (troši se do srede)", "Rivercote integralni hleb u kesi"],
-        ["Pirinčane galete (obične ili sa susamom), Sondey", "1–2 pakovanja (treba ~12 do subote: četvrtak 6 + subota 6)", "Sondey kukuruzne galete"],
-      ]],
-      ["3a · Slatkiši", [
-        ["J.D. Gross crna čokolada", "1 tabla (10g dnevno za Nikolu i 10g za Ninu: četvrtak, subota, utorak)", "Bilo koja crna čokolada 70%+"],
-      ]],
-      ["4 · Mesni proizvodi", [
-        ["Mleveno juneće meso (nemasno), Sveže meso Lidl", "1.2 kg (700g bolonjeze za vikend + 450g za ručak u četvrtak)", "2 pakovanja od po 500g"],
-        ["Pileće belo meso, Sveže meso Lidl", "cca 450g (petak)", "Pikok pileći fileti u pakovanju"],
-        ["Ćureća ili pileća prsa u listićima, Dulano", "1–2 pakovanja (užina u četvrtak + večera u subotu)", "Pikok Pure ćureća prsa"],
-      ]],
-      ["5 · Mlečni proizvodi", [
-        ["Grčki jogurt, Pilos", "1 kantica od 1 kg", "Milbona grčki tip jogurta"],
-        ["High Protein puding, Milbona/Pilos", "1 čašica od 200g (petak, slatka užina)", "Bilo koji high protein puding"],
-        ["Feta sir ili lagani beli sir, Pilos", "1 pakovanje od 200g/250g (dovoljno i za utorak)", "Milbona lagani beli sir sa nižim % masti"],
-      ]],
-      ["6 · Riba", [
-        ["Tunjevina u komadima u sopstvenom soku, Nixe", "2 konzerve (petak)", "Nixe komadi u suncokretovom ulju, uz obavezno snažno ceđenje"],
-      ]],
-      ["7 · Smrznuto", [
-        ["Smrznute maline, Freshona", "1 pakovanje od 500g", "Freshona smrznuto šumsko voće"],
-        ["Smrznuti kukuruz šećerac, Freshona", "1 kesa (Nina, ručak u petak: 100g, ostatak za ponedeljak i sredu)", "Kukuruz šećerac u konzervi bez šećera, dobro oceđen"],
-        ["Smrznuti miks povrća, Freshona", "1 kesa", "Bilo koji smrznuti miks povrća"],
-        ["Smrznuti začinjeni krompir, Lidl", "cca 500g (ručak u četvrtak)", "Bilo koji smrznuti začinjeni krompir"],
-      ]],
-      ["8 · Jaja", [
-        ["Sveža jaja (M ili L), Lidl", "1–2 pakovanja od 10 komada (treba ~11 kom)", "Bilo koja jaja istog pakovanja"],
-      ]],
-      ["9 · Testenina, pirinač i pasirani paradajz", [
-        ["Beli ili Jasmin pirinač, Golden Sun / Combino", "1 pakovanje od 500g (troši se do srede)", "Bilo koji beli pirinač"],
-        ["Tjestenina Penne ili Fusilli, Combino", "1 pakovanje od 500g", "Combino špageti"],
-        ["Pasirani paradajz / Pelat, Combino", "2 tetrapaka ili konzerve", "Baresa pasirani paradajz"],
-      ]],
-    ],
-  },
-  nedelja: {
-    title: "Kupovina u nedelju",
-    sub: "Zalihe i prep obroka za nedelju, ponedeljak, utorak i sredu. Ovsene, pirinač, hleb i orašasti plodovi se troše od četvrtka. Redosled prati put kroz Lidl.",
-    groups: [
-      ["2 · Voće i povrće", [
-        ["Sveža paprika (za omlete)", "3 komada", "Tikvice"],
-        ["Šampinjoni (za omlet u nedelju)", "150g", "Smrznuti šampinjoni"],
-        ["Svež kupus (za salate)", "1 manja glavica, cca 1 kg", "Gotova mešana salata u kesi iz frižidera"],
-        ["Paradajz (za salate)", "cca 1 kg", "Čeri paradajz"],
-        ["Krastavac (za salate)", "3 komada", "Sveža zelena paprika"],
-        ["Banane", "8 komada", "Bilo koje zrele banane"],
-      ]],
-      ["3 · Suva hrana", [
-        ["Pirinčane galete (obične ili sa susamom), Sondey", "1 pakovanje, samo ako je ostalo manje od 6 komada (užina u utorak)", "Sondey kukuruzne galete"],
-      ]],
-      ["4 · Mesni proizvodi", [
-        ["Nemasni svinjski but ili mleveno juneće meso, Sveže meso Lidl", "cca 450g (ručak u utorak)", "Pikok svinjski but"],
-        ["Pileće belo meso, Sveže meso Lidl", "cca 900g (ponedeljak i sreda)", "Pikok pileći fileti u pakovanju"],
-        ["Ćureća ili pileća prsa u listićima, Dulano", "1 pakovanje (užina u utorak)", "Pikok Pure ćureća prsa"],
-      ]],
-      ["5 · Mlečni proizvodi", [
-        ["Grčki jogurt, Pilos", "1 kantica od 1 kg", "Milbona grčki tip jogurta"],
-        ["High Protein puding, Milbona/Pilos", "3 čašice od 200g (nedelja, ponedeljak, sreda)", "Bilo koji high protein puding"],
-      ]],
-      ["6 · Riba", [
-        ["Tunjevina u komadima u sopstvenom soku, Nixe", "6 konzervi (nedelja, ponedeljak i sreda)", "Nixe komadi u suncokretovom ulju, uz obavezno snažno ceđenje"],
-      ]],
-      ["7 · Smrznuto", [
-        ["Smrznuti miks povrća, Freshona", "1 kesa", "Bilo koji smrznuti miks povrća"],
-        ["Smrznuti začinjeni krompir, Lidl", "cca 500g (ručak u utorak)", "Bilo koji smrznuti začinjeni krompir"],
-        ["Smrznute maline, Freshona", "1 pakovanje, zavisno od zaliha u zamrzivaču", "Freshona smrznuto šumsko voće"],
-        ["Smrznuti kukuruz šećerac, Freshona", "cca 200g (Nina, ručak u ponedeljak i sredu), samo ako nije ostalo od četvrtka", "Kukuruz šećerac u konzervi bez šećera, dobro oceđen"],
-      ]],
-      ["8 · Jaja", [
-        ["Sveža jaja (M ili L), Lidl", "3 pakovanja od 10 komada (treba ~24 kom)", "Bilo koja jaja istog pakovanja"],
-      ]],
-    ],
-  },
-};
-
-const SHOP_KEY = "mealprep-shop-v3";
-let shopList = "cetvrtak";
-let shopChecked = {};
-try { shopChecked = JSON.parse(localStorage.getItem(SHOP_KEY)) || {}; } catch (e) {}
-function saveShop() { try { localStorage.setItem(SHOP_KEY, JSON.stringify(shopChecked)); } catch (e) {} }
-
-function renderShop() {
-  const L = SHOP[shopList];
-  $("shopTitle").textContent = L.title;
-  $("shopSub").textContent = L.sub;
-  let html = "";
-  L.groups.forEach((g, gi) => {
-    html += `<div class="shop-group">${g[0]}</div>`;
-    g[1].forEach((it, ii) => {
-      const id = `${shopList}-${gi}-${ii}`;
-      html += `<label class="item"><input type="checkbox" data-id="${id}" ${shopChecked[id] ? "checked" : ""}>
-        <span class="box">✓</span>
-        <span class="txt"><span class="nm">${it[0]}</span><span class="qty">${it[1]}</span><span class="alt">Zamena: ${it[2]}</span></span></label>`;
-    });
-  });
-  $("shopList").innerHTML = html;
-  updateShopProgress();
-}
-function updateShopProgress() {
-  const boxes = document.querySelectorAll("#shopList input");
-  const done = [...boxes].filter(b => b.checked).length;
-  $("shopCount").textContent = `${done} / ${boxes.length} kupljeno`;
-  $("shopBar").style.width = (boxes.length ? done / boxes.length * 100 : 0) + "%";
-}
-$("shopList").addEventListener("change", e => {
-  const id = e.target.dataset.id;
-  if (!id) return;
-  if (e.target.checked) shopChecked[id] = 1; else delete shopChecked[id];
-  saveShop();
-  updateShopProgress();
-});
-document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
-  shopList = t.dataset.list;
-  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t));
-  renderShop();
-}));
-$("shopReset").addEventListener("click", () => {
-  if (!confirm("Poništiti sve štikliranje za ovu listu?")) return;
-  Object.keys(shopChecked).forEach(k => { if (k.startsWith(shopList + "-")) delete shopChecked[k]; });
-  saveShop();
-  renderShop();
-});
-// u četvrtak i petak–subotu otvori listu za četvrtak, u nedelju–sredu listu za nedelju
-(function () {
-  const d = new Date().getDay();
-  if ([0, 1, 2, 3].includes(d)) {
-    shopList = "nedelja";
-    document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.list === "nedelja"));
-  }
-})();
-renderShop();
 
 </script>
 </body>

@@ -105,11 +105,11 @@
 
   @media (max-width: 380px) { .entry { font-size: .8rem; } .entry .kg { font-size: 1.2rem; } }
   /* Glavni meni */
-  .nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  .nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
     margin: 0 -16px; padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
     background: var(--bg); border-bottom: 1px solid var(--line); }
-  .nav a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 700; font-size: .85rem;
-    padding: 10px 4px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+  .nav a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 700; font-size: .75rem;
+    padding: 10px 2px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
   .nav a.active { color: #fff; background: linear-gradient(90deg, var(--blue), var(--pink)); }
 </style>
 </head>
@@ -118,6 +118,7 @@
   <nav class="nav">
     <a href="index.html">🍽️ Plan</a>
     <a href="priprema.html">🍳 Priprema</a>
+    <a href="kupovina.html">🛒 Kupovina</a>
     <a href="napredak.html" class="active" aria-current="page">📈 Napredak</a>
   </nav>
   <header>
