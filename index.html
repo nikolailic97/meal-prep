@@ -250,6 +250,7 @@ const MEAL = {
   uzA: { name: "Užina (pred podne)", n: "150g grčkog jogurta + 1 banana.", m: "200g grčkog jogurta + šaka smrznutih malina." },
   uzB: { name: "Užina (pred podne)", n: "4 pirinčane galete + 4 listića pilećih/ćurećih prsa (cca 50g) + krastavac/paradajz. (Ili sa kikiriki puterom umesto prsa.)", m: "2 pirinčane galete + 2 listića pilećih/ćurećih prsa (cca 30g) + krastavac/paradajz. (Ili sa kikiriki puterom umesto prsa.)" },
   uzC: { name: "Užina (pred podne)", n: "Šaka pečenog neslanog badema.", m: "Manja šaka pečenog neslanog badema." },
+  jog: { name: "Užina (jogurt)", n: "200g grčkog jogurta + šaka smrznutih malina.", m: "150g grčkog jogurta + šaka smrznutih malina." },
   slat: { name: "Slatka užina", n: "Nikola (Slatkiš): 100g Milbona/Pilos High Protein pudinga (pola čašice).", m: "Nina (Slatkiš): 100g Milbona/Pilos High Protein pudinga (druga polovina čašice)." },
   whey: { name: "Odmah nakon treninga", n: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne treniraš: popodnevna užina ili u doručak.", m: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne trenira: popodnevna užina ili u doručak." },
   rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + smrznuti miks povrća. (Omega-3: 1 kaps)", m: "150g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)" },
@@ -257,7 +258,6 @@ const MEAL = {
   rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)" },
   vecA: { name: "Večera", n: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: 1 kaps)", m: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   vecB: { name: "Večera", n: "3 kuvana jaja + 50g nemasnog/feta sira + paradajz/krastavac. (Omega-3: 1 kaps)", m: "2 kuvana jaja + 30g nemasnog/feta sira + paradajz/krastavac. (Omega-3: opciono 1 kaps posle napornog treninga)" },
-  vecSub: { name: "Večera", n: "4 pirinčane galete + 4 listića pilećih/ćurećih prsa (cca 50g) + krastavac/paradajz. (Omega-3: 1 kaps) (Ili sa kikiriki puterom umesto prsa.)", m: "2 pirinčane galete + 2 listića pilećih/ćurećih prsa (cca 30g) + krastavac/paradajz. (Ili sa kikiriki puterom umesto prsa.)" },
   mg: { name: "Pred spavanje (~30 min pre sna)", both: "Magnezijum 300 (po 1 tab oboje) uz čašu vode." },
 };
 
@@ -284,21 +284,18 @@ const ITEMS = {
   slat: () => ({ rows: [["High Protein puding", "100g (pola čašice od 200g)"]] }),
   vecA: () => ({ rows: [["Maslinovo ulje", OIL]] }),
   vecB: w => ({ rows: [["Nemasni/feta sir", pk(w, "50g", "30g")]] }),
-  vecSub: w => ({
-    rows: [["Pileća/ćureća prsa", pk(w, "4 listića (cca 50g)", "2 listića (cca 30g)")]],
-    alt: { title: "🥜 Varijanta sa kikiriki puterom (umesto prsa)", rows: [
-      ["Kikiriki puter", pk(w, "20g (cca 1 puna kašika)", "10g (cca 1 kafena kašičica)")] ], note: PB_NOTE } }),
+  jog: w => ({ rows: [["Grčki jogurt", pk(w, "200g", "150g")], ["Smrznute maline", "šaka (cca 80g)"]] }),
 };
 
 // index = Date.getDay(): 0 = nedelja
 const DAYS = [
   { name: "Nedelja",    meals: ["dorC", "uzA", "slat", "whey", "rucC", "vecA", "mg"] },
   { name: "Ponedeljak", meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Utorak",     meals: ["dorB", "uzB", "whey", "rucB", "vecB", "mg"] },
+  { name: "Utorak",     meals: ["dorB", "uzB", "jog", "whey", "rucB", "vecB", "mg"] },
   { name: "Sreda",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Četvrtak",   meals: ["dorB", "uzB", "whey", "rucB", "vecB", "mg"] },
+  { name: "Četvrtak",   meals: ["dorB", "uzB", "jog", "whey", "rucB", "vecB", "mg"] },
   { name: "Petak",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Subota",     meals: ["dorB", "uzC", "whey", "rucC", "vecSub", "mg"] },
+  { name: "Subota",     meals: ["dorB", "uzC", "jog", "whey", "rucC", "vecA", "mg"] },
 ];
 
 /* ---------- Kalkulator ---------- */
