@@ -93,6 +93,7 @@
   }
   dialog.n .f input:focus { border-color: var(--blue); }
   dialog.m .f input:focus { border-color: var(--pink); }
+  .hint { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 4px 0 8px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: 16px; }
   .actions button { border: 0; border-radius: 12px; padding: 13px; font-weight: 700; font-size: 1rem; cursor: pointer; }
@@ -123,7 +124,7 @@
   </nav>
   <header>
     <h1>Napredak</h1>
-    <p>Težina i obimi · Nikola &amp; Nina</p>
+    <p>Vaga (Huawei Health) i obimi · Nikola &amp; Nina</p>
   </header>
 
   <div class="notice" id="notice"></div>
@@ -147,9 +148,19 @@
     <h3 id="dlgTitle">Unos</h3>
     <div class="f"><label for="fDate">Datum</label><input id="fDate" type="date" required></div>
     <div class="f"><label for="fKg">Težina (kg)</label><input id="fKg" type="text" inputmode="decimal" placeholder="npr. 82,4"></div>
+    <div class="hint">Iz Huawei Health (Telesna težina)</div>
     <div class="grid2">
-      <div class="f"><label for="fBelly">Obim stomaka (cm)</label><input id="fBelly" type="text" inputmode="decimal" placeholder="npr. 90"></div>
-      <div class="f"><label for="fChest">Obim grudi (cm)</label><input id="fChest" type="text" inputmode="decimal" placeholder="npr. 102"></div>
+      <div class="f"><label for="fFat">Mast (%)</label><input id="fFat" type="text" inputmode="decimal" placeholder="npr. 27,9"></div>
+      <div class="f"><label for="fMuscle">Mišići (kg)</label><input id="fMuscle" type="text" inputmode="decimal" placeholder="npr. 36,5"></div>
+      <div class="f"><label for="fWater">Voda (%)</label><input id="fWater" type="text" inputmode="decimal" placeholder="npr. 52"></div>
+      <div class="f"><label for="fVisc">Visceralna mast</label><input id="fVisc" type="text" inputmode="decimal" placeholder="npr. 9"></div>
+      <div class="f"><label for="fBmr">BMR (kcal)</label><input id="fBmr" type="text" inputmode="decimal" placeholder="npr. 1846"></div>
+      <div class="f"><label for="fBmi">BMI</label><input id="fBmi" type="text" inputmode="decimal" placeholder="npr. 27,4"></div>
+    </div>
+    <div class="hint">Meri se metrom</div>
+    <div class="grid2">
+      <div class="f"><label for="fBelly">Struk (cm)</label><input id="fBelly" type="text" inputmode="decimal" placeholder="npr. 90"></div>
+      <div class="f" id="fHipWrap"><label for="fHip">Kuk (cm)</label><input id="fHip" type="text" inputmode="decimal" placeholder="npr. 98"></div>
     </div>
     <div class="err" id="fErr"></div>
     <div class="actions">
@@ -219,6 +230,14 @@ const num = s => { const v = parseFloat(String(s).trim().replace(",", ".")); ret
 const fmt = v => (Math.round(v * 10) / 10).toString().replace(".", ",");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+/* [ključ, naziv, jedinica, id polja]; "belly" je struk (isti ključ kao stariji unosi), "chest" samo prikaz starih unosa */
+const FIELDS = [
+  ["fat", "Mast", " %", "fFat"], ["muscle", "Mišići", " kg", "fMuscle"], ["water", "Voda", " %", "fWater"],
+  ["visc", "Visc. mast", "", "fVisc"], ["bmr", "BMR", " kcal", "fBmr"], ["bmi", "BMI", "", "fBmi"],
+  ["belly", "Struk", " cm", "fBelly"], ["hip", "Kuk", " cm", "fHip"], ["chest", "Grudi", " cm", null],
+];
+const FORM_FIELDS = FIELDS.filter(f => f[3]);
+
 /* ---------- Prikaz ---------- */
 function render(all) {
   PEOPLE.forEach(p => {
@@ -241,8 +260,7 @@ function render(all) {
         <button class="del" type="button" data-id="${esc(e.id)}" aria-label="Obriši">×</button>
         <div class="date">${showDate(e.date)}</div>
         ${e.kg != null ? `<div class="kg">${fmt(e.kg)} kg${delta}</div>` : ""}
-        ${e.belly != null ? `<div class="row"><span>Stomak</span><b>${fmt(e.belly)} cm</b></div>` : ""}
-        ${e.chest != null ? `<div class="row"><span>Grudi</span><b>${fmt(e.chest)} cm</b></div>` : ""}
+        ${FIELDS.map(([k, label, unit]) => e[k] != null ? `<div class="row"><span>${label}</span><b>${fmt(e[k])}${unit}</b></div>` : "").join("")}
       </div>`;
     }).join("") : `<div class="empty">Još nema unosa</div>`;
   });
@@ -261,7 +279,8 @@ document.querySelectorAll(".add").forEach(b => b.addEventListener("click", () =>
   dlg.className = person === "nikola" ? "n" : "m";
   $("dlgTitle").textContent = (person === "nikola" ? "Nikola" : "Nina") + " – novi unos";
   $("fDate").value = todayISO();
-  ["fKg", "fBelly", "fChest"].forEach(id => $(id).value = "");
+  ["fKg", ...FORM_FIELDS.map(f => f[3])].forEach(id => $(id).value = "");
+  $("fHipWrap").style.display = person === "nina" ? "" : "none";
   $("fErr").textContent = "";
   dlg.showModal();
 }));
@@ -271,15 +290,15 @@ dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 $("form").addEventListener("submit", async e => {
   e.preventDefault();
   const date = $("fDate").value || todayISO();
-  const kg = num($("fKg").value), belly = num($("fBelly").value), chest = num($("fChest").value);
-  if (kg == null && belly == null && chest == null) {
+  const kg = num($("fKg").value);
+  const vals = FORM_FIELDS.map(([k, , , id]) => [k, num($(id).value)]).filter(([k, v]) => v != null && (k !== "hip" || person === "nina"));
+  if (kg == null && !vals.length) {
     $("fErr").textContent = "Unesi bar jednu vrednost.";
     return;
   }
   const entry = { person, date };
   if (kg != null) entry.kg = kg;
-  if (belly != null) entry.belly = belly;
-  if (chest != null) entry.chest = chest;
+  vals.forEach(([k, v]) => entry[k] = v);
   $("fSave").disabled = true;
   try {
     await store.add(entry);
