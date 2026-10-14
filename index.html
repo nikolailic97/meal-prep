@@ -244,7 +244,7 @@ const SALAD_KEYS = [
 
 // obroci (n = Nikola, m = Nina, both = isti tekst za oboje)
 const MEAL = {
-  dorA: { name: "Doručak", n: "Omlet od 3 jaja sa 75g paprike i lukom + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 75g paprike i lukom + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)" },
+  dorA: { name: "Doručak", n: "Omlet od 3 jaja sa 75g paprike ili 75g šampinjona (po izboru) + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 75g paprike + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)" },
   dorB: { name: "Doručak", n: "Zobene pahuljice u vodi (60g) + pola banane + cimet/kakao po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)", m: "Zobene pahuljice u vodi (40g) + šaka bobičastog voća + cimet po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)" },
   dorC: { name: "Doručak", n: "Omlet od 3–4 jaja sa 80g šampinjona i 40g paprike + 1–2 kriške integralnog hleba. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 70g šampinjona i 35g paprike + 1 kriška integralnog hleba. (Mivolis A-Z: 1 tab)" },
   uzA: { name: "Užina (pred podne)", n: "150g grčkog jogurta + 1 banana.", m: "200g grčkog jogurta + šaka smrznutih malina." },
@@ -253,7 +253,7 @@ const MEAL = {
   jog: { name: "Užina (jogurt)", n: "200g grčkog jogurta + šaka smrznutih malina.", m: "150g grčkog jogurta + šaka smrznutih malina." },
   slat: { name: "Slatka užina", n: "Nikola (Slatkiš): 100g Milbona/Pilos High Protein pudinga (pola čašice).", m: "Nina (Slatkiš): 100g Milbona/Pilos High Protein pudinga (druga polovina čašice)." },
   whey: { name: "Odmah nakon treninga", n: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne treniraš: popodnevna užina ili u doručak.", m: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne trenira: popodnevna užina ili u doručak." },
-  rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + smrznuti miks povrća. (Omega-3: 1 kaps)", m: "150g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)" },
+  rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + 150g smrznutog miksa povrća (Lidl Freshona Premium, kratko skuvanog). (Omega-3: 1 kaps)", m: "130g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)" },
   rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)" },
   rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)" },
   vecA: { name: "Večera", n: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: 1 kaps)", m: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: opciono 1 kaps posle napornog treninga)" },
@@ -267,7 +267,7 @@ const pk = (w, n, m) => (w === "n" ? n : m);
 const PB_NOTE = "Kikiriki puter: samo 100% kikiriki, bez šećera. Meri na kuhinjskoj vagi, ne odokativno.";
 const OIL = "1 kafena kašičica (~5g)";
 const ITEMS = {
-  dorA: () => ({ rows: [["Paprika", "75g"], ["Luk", "cca 30g (pola manje glavice)"]] }),
+  dorA: w => ({ rows: [[w === "n" ? "Paprika ili šampinjoni (po izboru)" : "Paprika", "75g"]] }),
   dorB: w => ({ rows: [
     ["Zobene pahuljice", pk(w, "60g", "40g")],
     ["Voda za kuvanje", pk(w, "cca 150ml (veća šolja)", "cca 100ml (manja šolja)")],

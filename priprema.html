@@ -17,6 +17,8 @@
     --blue-dark: #2549c4;
     --pink: #ec4899;
     --pink-soft: #ffe9f3;
+    --amber-soft: #fff6e0;
+    --amber: #b7791f;
     --radius: 20px;
     --shadow: 0 6px 24px rgba(40, 55, 120, .08);
   }
@@ -32,6 +34,8 @@
       --blue-dark: #a9c0ff;
       --pink: #ff6fb5;
       --pink-soft: #4a1d3b;
+      --amber-soft: #3a3016;
+      --amber: #f2c46b;
       --shadow: 0 6px 24px rgba(0, 0, 0, .3);
     }
   }
@@ -119,6 +123,8 @@
   .recipe-body ul, .recipe-body ol { margin: 0; padding-left: 20px; }
   .recipe-body li { margin: 4px 0; }
   .recipe-body .for { margin-top: 12px; font-size: .82rem; color: var(--muted); }
+  /* Hrana van plana */
+  .food-tag { display: inline-block; margin: 0 0 8px; padding: 4px 10px; border-radius: 99px; font-size: .78rem; font-weight: 700; background: var(--amber-soft); color: var(--amber); }
   @media (max-width: 380px) { .portions { grid-template-columns: 1fr; } }
   /* Glavni meni */
   .nav { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
@@ -159,6 +165,11 @@
     <div id="recipeList"></div>
   </section>
 
+  <div class="section-title" id="hrana">Hrana (van nedeljnog plana)</div>
+  <section class="card recipes" aria-label="Hrana">
+    <div id="foodList"></div>
+  </section>
+
 </div>
 
 <script>
@@ -166,8 +177,8 @@
 const RECIPES = {
   piletina: {
     title: "Pečena piletina, pirinač i povrće",
-    ingredients: "1.3 kg pilećeg belog mesa (sirovo) – daje oko 1 kg pečenog za 3 dana, 400g pirinča (sirovo) za 3 dana, oko 1 kg smrznutog miksa povrća, so, biber, slatka paprika, beli luk u prahu",
-    steps: "Piletinu iseći na kockice, začiniti (so, biber, slatka paprika, beli luk u prahu) i peći na tiganju sa par kapi ulja 6–8 min. Pirinač kuvati sa duplo više vode dok ne upije. Smrznuti miks povrća kuvati u ključaloj slanoj vodi 3–4 min. Po obroku: Nikola 180g pečenog mesa + 70g sirovog pirinča, Nina 150g pečenog mesa + 60g sirovog pirinča.",
+    ingredients: "1.27 kg pilećeg belog mesa (sirovo) – daje oko 930g pečenog za 3 dana, 400g pirinča (sirovo) za 3 dana, 450g smrznutog miksa povrća (Freshona Premium, Lidl), so, biber, slatka paprika, beli luk u prahu",
+    steps: "Piletinu iseći na kockice, začiniti (so, biber, slatka paprika, beli luk u prahu) i peći na tiganju sa par kapi ulja 6–8 min. Pirinač kuvati sa duplo više vode dok ne upije. Smrznuti miks povrća kuvati u ključaloj slanoj vodi 3–4 min. Po obroku: Nikola 180g pečenog mesa + 70g sirovog pirinča + 150g miksa povrća, Nina 130g pečenog mesa + 60g sirovog pirinča + 80–100g kukuruza.",
   },
   krompir: {
     title: "Meso i krompir",
@@ -181,13 +192,13 @@ const RECIPES = {
   },
   omlet: {
     title: "Omlet sa povrćem",
-    ingredients: "Za 1 dan: 6 jaja (Nikola 3 + Nina 3), 150g paprike (Nikola 75g + Nina 75g, oko 1 paprika), pola crnog luka, 2 kriške integralnog hleba. Za 3 dana: 18 jaja, 450g paprike (3 paprike), 1.5 crni luk, 6 kriški hleba",
-    steps: "Papriku i luk iseckati i propržiti 2–3 min. Umutiti jaja sa prstohvatom soli i preliti preko povrća. Peći sa obe strane. Nikola 3 jaja + 75g paprike + 1 kriška hleba, Nina 3 jaja + 75g paprike + 1 kriška hleba.",
+    ingredients: "Za 1 dan: 6 jaja (Nikola 3 + Nina 3), 150g paprike (Nikola 75g paprike ili šampinjona + Nina 75g paprike, oko 1 paprika), 2 kriške integralnog hleba. Za 3 dana: 18 jaja, 450g paprike (3 paprike), 6 kriški hleba",
+    steps: "Papriku (ili šampinjone za Nikolu) iseckati i propržiti 2–3 min. Umutiti jaja sa prstohvatom soli i preliti preko povrća. Peći sa obe strane. Nikola 3 jaja + 75g paprike ili šampinjona + 1 kriška hleba, Nina 3 jaja + 75g paprike + 1 kriška hleba.",
   },
   omletC: {
     title: "Omlet sa šampinjonima",
-    ingredients: "Za 1 dan: 6–7 jaja (Nikola 3–4 + Nina 3), 150g šampinjona (Nikola 80g + Nina 70g), 75g paprike (Nikola 40g + Nina 35g), pola crnog luka, 2–3 kriške integralnog hleba. Za 2 dana: 12–14 jaja, 300g šampinjona, 150g paprike, 1 crni luk, 4–6 kriški hleba",
-    steps: "Šampinjone iseći na listiće i pržiti na jakoj vatri 4–5 min dok ne upiju vodu. Dodati papriku i luk još 2 min. Umutiti jaja sa prstohvatom soli, preliti i peći sa obe strane. Nikola 3–4 jaja + 80g šampinjona + 40g paprike + 1–2 kriške hleba, Nina 3 jaja + 70g šampinjona + 35g paprike + 1 kriška hleba.",
+    ingredients: "Za 1 dan: 6–7 jaja (Nikola 3–4 + Nina 3), 150g šampinjona (Nikola 80g + Nina 70g), 75g paprike (Nikola 40g + Nina 35g), 2–3 kriške integralnog hleba. Za 2 dana: 12–14 jaja, 300g šampinjona, 150g paprike, 4–6 kriški hleba",
+    steps: "Šampinjone iseći na listiće i pržiti na jakoj vatri 4–5 min dok ne upiju vodu. Dodati papriku još 2 min. Umutiti jaja sa prstohvatom soli, preliti i peći sa obe strane. Nikola 3–4 jaja + 80g šampinjona + 40g paprike + 1–2 kriške hleba, Nina 3 jaja + 70g šampinjona + 35g paprike + 1 kriška hleba.",
   },
   kasa: {
     title: "Ovsena kaša",
@@ -204,6 +215,26 @@ const RECIPE_ORDER = [
   ["omlet", "Doručak: ponedeljak, sreda, petak"],
   ["kasa", "Doručak: utorak, četvrtak, subota"],
   ["omletC", "Doručak: nedelja"],
+];
+
+/* ---------- Hrana van plana ---------- */
+// replaces: šta menja u planu; buy: šta kupuješ; n/m: šta ko stavlja i jede; steps: priprema
+const FOOD = [
+  {
+    title: "Pica sa ćurećim prsima",
+    replaces: "Menja ručak ili večeru (jedan obrok, ne doručak)",
+    buy: [
+      "Zamrznuta podloga za picu Napoli sa bosiljkom (Lidl, congelato), 270g",
+      "Pelat (Combino)",
+      "Ćureća ili pileća prsa, 200g (sveža ili Dulano listići)",
+      "Mozzarella light, 100g",
+      "Šampinjoni, paprika, čeri paradajz – po želji",
+    ],
+    n: "150g podloge (cca 55% pice) · 3 kašike pelata · 110g prsa · 55g mozzarelle · 80g povrća",
+    m: "120g podloge (cca 45% pice) · 2 kašike pelata · 90g prsa · 45g mozzarelle · 60g povrća",
+    steps: "Prsa iseći na sitne kockice, začiniti solju, biberom i origanom i kratko propržiti na suvom tiganju 3–4 min. Podlogu za picu premazati pelatom (ukupno 5 kašika). Rasporediti prsa, povrće i na kraju mozzarellu. Peći u rerni prema uputstvu na pakovanju podloge. Ukupno za celu picu: 5 kašika pelata, 200g prsa, 100g mozzarelle, povrće po želji.",
+    note: "Ako pica menja ručak: taj dan preskoči spremljeni ručak (ide u frižider za sledeći dan ili u zamrzivač). Ako menja večeru: preskoči tunjevinu ili jaja. Užine i doručak ostaju isti. Količine su za celu podlogu od 270g (Nikola 150g + Nina 120g). Posle pečenja podeli picu na oko 55% / 45%, ili izmeri podlogu pre nego što je premažeš pelatom.",
+  },
 ];
 
 /* ---------- Plan pripreme ---------- */
@@ -226,12 +257,12 @@ const PREP = {
       {
         title: "Piletina, pirinač i povrće", cov: "Ručak: petak (1 dan)", recipe: "piletina",
         items: [
-          "cca 450g sirovog pilećeg belog mesa – daje oko 330g pečenog",
+          "cca 420g sirovog pilećeg belog mesa – daje oko 310g pečenog",
           "130g sirovog pirinča (Nikola 70g + Nina 60g)",
-          "Smrznuti miks povrća (Nikola) i 100g smrznutog kukuruza šećerca (Nina)",
+          "150g smrznutog miksa povrća Freshona Premium (Nikola) i 100g smrznutog kukuruza šećerca (Nina)",
         ],
-        n: "180g mesa + 70g sirovog pirinča + miks povrća",
-        m: "150g mesa + 60g sirovog pirinča + 80–100g kukuruza",
+        n: "180g mesa + 70g sirovog pirinča + 150g miksa povrća",
+        m: "130g mesa + 60g sirovog pirinča + 80–100g kukuruza",
       },
       {
         title: "Bolonjeze sos", cov: "Ručak: subota i nedelja (2 dana)", recipe: "bolonjeze",
@@ -249,7 +280,7 @@ const PREP = {
       title: "Spremaš svež taj dan (ne unapred)",
       items: [
         "Četvrtak doručak: ovsena kaša",
-        "Petak doručak: omlet sa povrćem (6 jaja + 150g paprike)",
+        "Petak doručak: omlet sa povrćem (6 jaja + 150g paprike; Nikola može šampinjone)",
         "Subota doručak: ovsena kaša",
         "Užine i večere (tunjevina, jaja, galete, jogurt) ne traže kuvanje",
       ],
@@ -262,13 +293,13 @@ const PREP = {
       {
         title: "Piletina, pirinač i povrće", cov: "Ručak: ponedeljak i sreda (2 dana)", recipe: "piletina",
         items: [
-          "cca 900g sirovog pilećeg belog mesa – daje oko 660g pečenog",
+          "cca 850g sirovog pilećeg belog mesa – daje oko 620g pečenog",
           "260g sirovog pirinča (Nikola 140g + Nina 120g)",
-          "1 kesa smrznutog miksa povrća (Nikola) + cca 200g kukuruza šećerca (Nina)",
+          "300g smrznutog miksa povrća Freshona Premium (Nikola, 2 × 150g) + cca 200g kukuruza šećerca (Nina)",
           "Podeli u dve posude – jedna za ponedeljak, jedna za sredu",
         ],
-        n: "180g mesa + 70g sirovog pirinča + miks povrća",
-        m: "150g mesa + 60g sirovog pirinča + 80–100g kukuruza",
+        n: "180g mesa + 70g sirovog pirinča + 150g miksa povrća",
+        m: "130g mesa + 60g sirovog pirinča + 80–100g kukuruza",
       },
       {
         title: "Meso i krompir", cov: "Ručak: utorak (1 dan)", recipe: "krompir",
@@ -285,7 +316,7 @@ const PREP = {
       title: "Spremaš svež taj dan (ne unapred)",
       items: [
         "Nedelja doručak: omlet sa šampinjonima",
-        "Ponedeljak i sreda doručak: omlet sa povrćem (6 jaja + 150g paprike)",
+        "Ponedeljak i sreda doručak: omlet sa povrćem (6 jaja + 150g paprike; Nikola može šampinjone)",
         "Utorak doručak: ovsena kaša",
         "Večere (tunjevina, jaja, galete) i užine ne traže kuvanje",
       ],
@@ -305,6 +336,17 @@ $("recipeList").innerHTML = RECIPE_ORDER.map(([key, when], i) => {
   body += `<div class="for">${when}</div>`;
   return `<details class="recipe" id="r-${key}">
     <summary><span class="t"><span class="num">${i + 1}</span>${r.title}</span><span class="chev">▼</span></summary>
+    <div class="recipe-body">${body}</div></details>`;
+}).join("");
+
+$("foodList").innerHTML = FOOD.map((f, i) => {
+  let body = `<div class="food-tag">${f.replaces}</div>`;
+  body += `<h4>Kupuješ u Lidlu</h4><ul>${f.buy.map(x => `<li>${x}</li>`).join("")}</ul>`;
+  body += `<h4>Priprema</h4><ol>` + splitSteps(f.steps).map(x => `<li>${x}</li>`).join("") + `</ol>`;
+  body += `<h4>Ko koliko</h4><div class="portions"><div class="p n"><b>Nikola</b>${f.n}</div><div class="p m"><b>Nina</b>${f.m}</div></div>`;
+  body += `<div class="for">${f.note}</div>`;
+  return `<details class="recipe" id="f-${i}">
+    <summary><span class="t"><span class="num">${i + 1}</span>${f.title}</span><span class="chev">▼</span></summary>
     <div class="recipe-body">${body}</div></details>`;
 }).join("");
 
