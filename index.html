@@ -255,6 +255,7 @@ const MEAL = {
   whey: { name: "Odmah nakon treninga", n: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne treniraš: popodnevna užina ili u doručak.", m: "Pola banane, pa 1 merica whey proteina u 250–300ml vode. Ako ne trenira: popodnevna užina ili u doručak." },
   rucA: { name: "Ručak", n: "180g pečenog belog mesa + 70g sirovog pirinča (merenog pre kuvanja) + 150g smrznutog miksa povrća (Lidl Freshona Premium, kratko skuvanog). (Omega-3: 1 kaps)", m: "130g pečenog belog mesa + 60g sirovog pirinča (merenog pre kuvanja) + 80–100g smrznutog kukuruza šećerca (kratko skuvanog). (Omega-3: 1 kaps)" },
   rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)" },
+  rucD: { name: "Ručak", n: "Zapečena tortilja sa mlevenom junetinom i pasuljem: 1 tortilja + 55% mesne smese (cca 165g sirovog mesa) + 40g light mocarele + kupus salata. (Omega-3: 1 kaps)", m: "Zapečena tortilja sa mlevenom junetinom i pasuljem: 1 tortilja + 45% mesne smese (cca 135g sirovog mesa) + 30g light mocarele + kupus salata. (Omega-3: 1 kaps)" },
   rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)" },
   vecA: { name: "Večera", n: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: 1 kaps)", m: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   vecB: { name: "Večera", n: "3 kuvana jaja + 50g nemasnog/feta sira + paradajz/krastavac. (Omega-3: 1 kaps)", m: "2 kuvana jaja + 30g nemasnog/feta sira + paradajz/krastavac. (Omega-3: opciono 1 kaps posle napornog treninga)" },
@@ -284,6 +285,10 @@ const ITEMS = {
   slat: () => ({ rows: [["High Protein puding", "100g (pola čašice od 200g)"]] }),
   vecA: () => ({ rows: [["Maslinovo ulje", OIL]] }),
   vecB: w => ({ rows: [["Nemasni/feta sir", pk(w, "50g", "30g")]] }),
+  rucD: w => ({ rows: [
+    ["Velika tortilja", "1 komad (cca 60g)"],
+    ["Mesna smesa (meso, pasulj, sos)", pk(w, "55% ukupne smese", "45% ukupne smese")],
+    ["Light mocarela", pk(w, "40g", "30g")] ] }),
   jog: w => ({ rows: [["Grčki jogurt", pk(w, "200g", "150g")], ["Smrznute maline", "šaka (cca 80g)"]] }),
 };
 
@@ -291,9 +296,9 @@ const ITEMS = {
 const DAYS = [
   { name: "Nedelja",    meals: ["dorC", "uzA", "slat", "whey", "rucC", "vecA", "mg"] },
   { name: "Ponedeljak", meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Utorak",     meals: ["dorB", "uzB", "jog", "whey", "rucB", "vecB", "mg"] },
+  { name: "Utorak",     meals: ["dorB", "uzB", "jog", "whey", "rucD", "vecB", "mg"] },
   { name: "Sreda",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Četvrtak",   meals: ["dorB", "uzB", "jog", "whey", "rucB", "vecB", "mg"] },
+  { name: "Četvrtak",   meals: ["dorB", "uzB", "jog", "whey", "rucD", "vecB", "mg"] },
   { name: "Petak",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
   { name: "Subota",     meals: ["dorB", "uzC", "jog", "whey", "rucC", "vecA", "mg"] },
 ];

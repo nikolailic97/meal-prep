@@ -138,9 +138,6 @@ const SHOP = {
     title: "Kupovina u četvrtak",
     sub: "Zalihe i prep obroka za četvrtak, petak i subotu (suva hrana ide za celu nedelju do srede). Redosled prati put kroz Lidl.",
     groups: [
-      ["1 · Orašasti plodovi", [
-        ["Pečeni neslani badem, Alesto", "1 pakovanje od 200g (Nikola i Nina, užina vikendom)", "Alesto pečeni neslani kikiriki ili lešnik"],
-      ]],
       ["2 · Voće i povrće", [
         ["Sveža paprika (za omlete)", "2 komada", "Tikvice"],
         ["Svež kupus (za salate)", "1 manja glavica, cca 1 kg", "Gotova mešana salata u kesi iz frižidera"],
@@ -148,23 +145,25 @@ const SHOP = {
         ["Krastavac (za salate)", "2 komada", "Sveža zelena paprika"],
         ["Limun", "1 kg", "Limunov sok iz flašice ili jabukovo sirće"],
         ["Banane", "5 komada", "Bilo koje zrele banane"],
-        ["Crni luk i beli luk (za bolonjeze)", "po 1 mrežica/pakovanje", "Granule belog/crnog luka iz kesice"],
+        ["Crni luk i beli luk (za bolonjeze i tortilje)", "po 1 mrežica/pakovanje", "Granule belog/crnog luka iz kesice"],
       ]],
       ["3 · Suva hrana", [
         ["Sitne ovsene pahuljice, Crownfield", "1 pakovanje od 500g (četvrtak, subota, utorak)", "Bilo koje sitne ovsene pahuljice bez dodataka"],
         ["Integralni tost hleb, Taste of America Whole Grain", "1 pakovanje (troši se do srede)", "Rivercote integralni hleb u kesi"],
+        ["Velike pšenične ili integralne tortilje (tortilje u četvrtak)", "1 pakovanje (trebaju 2 komada)", "Bilo koje tortilje ili wrap od cca 25cm"],
         ["Pirinčane galete (obične ili sa susamom), Sondey", "1 pakovanje (treba ~6, užina u četvrtak)", "Sondey kukuruzne galete"],
       ]],
       ["3a · Slatkiši", [
         ["J.D. Gross crna čokolada", "1 tabla (10g dnevno za Nikolu i 10g za Ninu: četvrtak, subota, utorak)", "Bilo koja crna čokolada 70%+"],
       ]],
       ["4 · Mesni proizvodi", [
-        ["Mleveno juneće meso (nemasno), Sveže meso Lidl", "cca 1.1 kg, uzmi po meri (660g bolonjeze za subotu i nedelju + 450g za ručak u četvrtak, bez viška)", "2 pakovanja od po 500g + malo dodatno, ili 1 kg ako nema po meri"],
+        ["Mleveno juneće meso (nemasno), Sveže meso Lidl", "cca 960g, uzmi po meri (660g bolonjeze za subotu i nedelju + 300g za tortilje u četvrtak)", "1 kg ako nema po meri"],
         ["Pileće belo meso, Sveže meso Lidl", "cca 420g (petak)", "Pikok pileći fileti u pakovanju"],
         ["Ćureća ili pileća prsa u listićima, Dulano", "1 pakovanje (užina u četvrtak)", "Pikok Pure ćureća prsa"],
       ]],
       ["5 · Mlečni proizvodi", [
         ["Grčki jogurt, Pilos", "1 kantica od 1 kg + 1 kantica od 500g (četvrtak, petak, subota)", "Milbona grčki tip jogurta"],
+        ["Light mozzarella, Milbona", "1 kugla od 125g (tortilje u četvrtak, treba 70g)", "Rendani light sir za picu"],
         ["High Protein puding, Milbona/Pilos", "1 čašica od 200g (petak, slatka užina)", "Bilo koji high protein puding"],
         ["Feta sir ili lagani beli sir, Pilos", "1 pakovanje od 200g/250g (dovoljno i za utorak)", "Milbona lagani beli sir sa nižim % masti"],
       ]],
@@ -175,7 +174,6 @@ const SHOP = {
         ["Smrznute maline, Freshona", "2 pakovanja od 500g", "Freshona smrznuto šumsko voće"],
         ["Smrznuti kukuruz šećerac, Freshona", "1 kesa (Nina, ručak u petak: 100g, ostatak za ponedeljak i sredu)", "Kukuruz šećerac u konzervi bez šećera, dobro oceđen"],
         ["Smrznuti miks povrća, Freshona Premium", "1 kesa (Nikola, 150g po ručku: petak 150g, ostatak za ponedeljak i sredu – ukupno 450g)", "Bilo koji smrznuti miks povrća"],
-        ["Smrznuti začinjeni krompir, Lidl", "cca 500g (ručak u četvrtak)", "Bilo koji smrznuti začinjeni krompir"],
       ]],
       ["8 · Jaja", [
         ["Sveža jaja (M ili L), Lidl", "1–2 pakovanja od 10 komada (treba ~11 kom)", "Bilo koja jaja istog pakovanja"],
@@ -183,13 +181,15 @@ const SHOP = {
       ["9 · Testenina, pirinač i pasirani paradajz", [
         ["Beli ili Jasmin pirinač, Golden Sun / Combino", "1 pakovanje od 500g (troši se do srede)", "Bilo koji beli pirinač"],
         ["Tjestenina Penne ili Fusilli, Combino", "1 pakovanje od 500g", "Combino špageti"],
-        ["Pasirani paradajz / Pelat, Combino", "2 tetrapaka ili konzerve", "Baresa pasirani paradajz"],
+        ["Pasirani paradajz / Pelat, Combino", "3 tetrapaka ili konzerve (bolonjeze + tortilje)", "Baresa pasirani paradajz"],
+        ["Paradajz pire (koncentrat), Combino", "1 mala tuba ili konzervica (tortilje, treba 1 kašika)", "Još malo pelata ukuvanog da se zgusne"],
+        ["Crveni pasulj u konzervi, Combino", "1 konzerva (tortilje, treba pola)", "Beli pasulj u konzervi"],
       ]],
     ],
   },
   nedelja: {
     title: "Kupovina u nedelju",
-    sub: "Zalihe i prep obroka za nedelju, ponedeljak, utorak i sredu. Ovsene, pirinač, hleb i orašasti plodovi se troše od četvrtka. Redosled prati put kroz Lidl.",
+    sub: "Zalihe i prep obroka za nedelju, ponedeljak, utorak i sredu. Ovsene, pirinač i hleb se troše od četvrtka. Redosled prati put kroz Lidl.",
     groups: [
       ["2 · Voće i povrće", [
         ["Sveža paprika (za omlete)", "3 komada", "Tikvice"],
@@ -203,12 +203,13 @@ const SHOP = {
         ["Pirinčane galete (obične ili sa susamom), Sondey", "1 pakovanje, samo ako je ostalo manje od 6 komada (užina u utorak)", "Sondey kukuruzne galete"],
       ]],
       ["4 · Mesni proizvodi", [
-        ["Nemasni svinjski but ili mleveno juneće meso, Sveže meso Lidl", "cca 450g (ručak u utorak)", "Pikok svinjski but"],
+        ["Mleveno juneće meso (nemasno), Sveže meso Lidl", "cca 300g (tortilje u utorak)", "Pikok mleveno juneće"],
         ["Pileće belo meso, Sveže meso Lidl", "cca 850g (ponedeljak i sreda)", "Pikok pileći fileti u pakovanju"],
         ["Ćureća ili pileća prsa u listićima, Dulano", "1 pakovanje (užina u utorak)", "Pikok Pure ćureća prsa"],
       ]],
       ["5 · Mlečni proizvodi", [
         ["Grčki jogurt, Pilos", "1 kantica od 1 kg + 1 kantica od 500g (nedelja do sreda)", "Milbona grčki tip jogurta"],
+        ["Light mozzarella, Milbona", "1 kugla od 125g (tortilje u utorak, treba 70g), samo ako nije ostalo od četvrtka", "Rendani light sir za picu"],
         ["High Protein puding, Milbona/Pilos", "3 čašice od 200g (nedelja, ponedeljak, sreda)", "Bilo koji high protein puding"],
       ]],
       ["6 · Riba", [
@@ -216,18 +217,23 @@ const SHOP = {
       ]],
       ["7 · Smrznuto", [
         ["Smrznuti miks povrća, Freshona Premium", "300g (Nikola, ponedeljak i sreda po 150g), samo ako nije ostalo od četvrtka", "Bilo koji smrznuti miks povrća"],
-        ["Smrznuti začinjeni krompir, Lidl", "cca 500g (ručak u utorak)", "Bilo koji smrznuti začinjeni krompir"],
         ["Smrznute maline, Freshona", "1–2 pakovanja, zavisno od zaliha u zamrzivaču", "Freshona smrznuto šumsko voće"],
         ["Smrznuti kukuruz šećerac, Freshona", "cca 200g (Nina, ručak u ponedeljak i sredu), samo ako nije ostalo od četvrtka", "Kukuruz šećerac u konzervi bez šećera, dobro oceđen"],
       ]],
       ["8 · Jaja", [
         ["Sveža jaja (M ili L), Lidl", "3 pakovanja od 10 komada (treba ~24 kom)", "Bilo koja jaja istog pakovanja"],
       ]],
+      ["9 · Za tortilje (utorak)", [
+        ["Velike pšenične ili integralne tortilje", "trebaju 2 komada, samo ako nije ostalo od četvrtka", "Bilo koje tortilje ili wrap od cca 25cm"],
+        ["Crveni pasulj u konzervi, Combino", "1 konzerva (treba pola); ostatak od četvrtka ne čuvaj do utorka, osim ako je zamrznut", "Beli pasulj u konzervi"],
+        ["Pasirani paradajz / Pelat, Combino", "1 tetrapak ili konzerva (treba 150g)", "Baresa pasirani paradajz"],
+        ["Crni luk", "1 manji, samo ako nije ostalo od četvrtka", "Granule crnog luka iz kesice"],
+      ]],
     ],
   },
 };
 
-const SHOP_KEY = "mealprep-shop-v3";
+const SHOP_KEY = "mealprep-shop-v4";
 let shopList = "cetvrtak";
 let shopChecked = {};
 try { shopChecked = JSON.parse(localStorage.getItem(SHOP_KEY)) || {}; } catch (e) {}
