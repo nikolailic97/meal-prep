@@ -245,7 +245,7 @@ const SALAD_KEYS = [
 // obroci (n = Nikola, m = Nina, both = isti tekst za oboje)
 const MEAL = {
   dorA: { name: "Doručak", n: "Omlet od 3 jaja sa 75g paprike ili 75g šampinjona (po izboru) + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 75g paprike + 1 kriška integralnog hleba + kafa bez šećera. (Mivolis A-Z: 1 tab)" },
-  dorB: { name: "Doručak", n: "Zobene pahuljice u vodi (60g) + pola banane + cimet/kakao po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)", m: "Zobene pahuljice u vodi (40g) + šaka bobičastog voća + cimet po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)" },
+  dorB: { name: "Doručak", n: "Zobene pahuljice u vodi (60g) + 1 merica whey proteina (umešaj kad se kaša malo prohladi) + pola banane + cimet/kakao po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)", m: "Zobene pahuljice u vodi (40g) + 1 merica whey proteina (umešaj kad se kaša malo prohladi) + šaka bobičastog voća + cimet po želji + 10g J.D. Gross crne čokolade (jedna kockica). (Mivolis A-Z: 1 tab)" },
   dorC: { name: "Doručak", n: "Omlet od 3–4 jaja sa 80g šampinjona i 40g paprike + 1–2 kriške integralnog hleba. (Mivolis A-Z: 1 tab)", m: "Omlet od 3 jaja sa 70g šampinjona i 35g paprike + 1 kriška integralnog hleba. (Mivolis A-Z: 1 tab)" },
   uzA: { name: "Užina (pred podne)", n: "150g grčkog jogurta + 1 banana.", m: "200g grčkog jogurta + šaka smrznutih malina." },
   uzB: { name: "Užina (pred podne)", n: "4 pirinčane galete + 4 listića pilećih/ćurećih prsa (cca 50g) + krastavac/paradajz. (Ili sa kikiriki puterom umesto prsa.)", m: "2 pirinčane galete + 2 listića pilećih/ćurećih prsa (cca 30g) + krastavac/paradajz. (Ili sa kikiriki puterom umesto prsa.)" },
@@ -257,7 +257,8 @@ const MEAL = {
   rucB: { name: "Ručak", n: "180g nemasnog svinjskog buta ili mlevene junetine + 250g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)", m: "150g nemasnog svinjskog buta ili mlevene junetine + 200g pečenog smrznutog začinjenog krompira (Lidl) + kupus salata. (Omega-3: 1 kaps)" },
   rucD: { name: "Ručak", n: "Zapečena tortilja sa mlevenom junetinom i pasuljem: 1 tortilja + 55% mesne smese (cca 165g sirovog mesa) + 40g light mocarele + kupus salata. (Omega-3: 1 kaps)", m: "Zapečena tortilja sa mlevenom junetinom i pasuljem: 1 tortilja + 45% mesne smese (cca 135g sirovog mesa) + 30g light mocarele + kupus salata. (Omega-3: 1 kaps)" },
   rucC: { name: "Ručak", n: "Bolonjeze: 180g junetine u paradajz pelatu + 80g sirove tjestenine. (Omega-3: 1 kaps)", m: "Bolonjeze: 150g junetine u paradajz pelatu + 70g sirove tjestenine. (Omega-3: 1 kaps)" },
-  vecA: { name: "Večera", n: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: 1 kaps)", m: "1 konzerva tunjevine (oceđena od ulja) + velika mešana salata + 1 kafena kašičica maslinovog ulja. (Omega-3: opciono 1 kaps posle napornog treninga)" },
+  vecT: { name: "Večera", n: "Zapečeni tost: 3 kriške integralnog tosta + 60g pilećih/ćurećih prsa u omotu + 30g light mocarele + kupus salata. (Omega-3: 1 kaps)", m: "Zapečeni tost: 2 kriške integralnog tosta + 30g pilećih/ćurećih prsa u omotu + 20g light mocarele + kupus salata. (Omega-3: opciono 1 kaps posle napornog treninga)" },
+  vecP: { name: "Večera", n: "Brza pica na tortilji: 1 tortilja + 2 kašike pelata + origano + 60g pilećih/ćurećih prsa + 40g light mocarele + kupus salata. (Omega-3: 1 kaps)", m: "Brza pica na tortilji: 1 tortilja + 2 kašike pelata + origano + 40g pilećih/ćurećih prsa + 25g light mocarele + kupus salata. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   vecB: { name: "Večera", n: "3 kuvana jaja + 50g nemasnog/feta sira + paradajz/krastavac. (Omega-3: 1 kaps)", m: "2 kuvana jaja + 30g nemasnog/feta sira + paradajz/krastavac. (Omega-3: opciono 1 kaps posle napornog treninga)" },
   mg: { name: "Pred spavanje (~30 min pre sna)", both: "Magnezijum 300 (po 1 tab oboje) uz čašu vode." },
 };
@@ -273,6 +274,7 @@ const ITEMS = {
     ["Zobene pahuljice", pk(w, "60g", "40g")],
     ["Voda za kuvanje", pk(w, "cca 150ml (veća šolja)", "cca 100ml (manja šolja)")],
     w === "n" ? ["Banana", "pola (cca 55g oljuštene)"] : ["Bobičasto voće", "šaka (cca 70–80g)"],
+    ["Whey protein", "1 merica (umešati u kašu kad se prohladi)"],
     ["J.D. Gross crna čokolada", "10g (jedna kockica)"] ] }),
   dorC: w => ({ rows: [["Šampinjoni", pk(w, "80g", "70g")], ["Paprika", pk(w, "40g", "35g")]] }),
   uzA: w => ({ rows: [
@@ -283,7 +285,15 @@ const ITEMS = {
     alt: { title: "🥜 Varijanta sa kikiriki puterom (umesto prsa)", rows: [
       ["Kikiriki puter", pk(w, "20g (cca 1 puna kašika)", "10g (cca 1 kafena kašičica)")] ], note: PB_NOTE } }),
   slat: () => ({ rows: [["High Protein puding", "100g (pola čašice od 200g)"]] }),
-  vecA: () => ({ rows: [["Maslinovo ulje", OIL]] }),
+  vecT: w => ({ rows: [
+    ["Integralni tost", pk(w, "3 kriške", "2 kriške")],
+    ["Pileća/ćureća prsa u omotu", pk(w, "60g", "30g")],
+    ["Light mocarela", pk(w, "30g", "20g")] ] }),
+  vecP: w => ({ rows: [
+    ["Velika tortilja", "1 komad (cca 60g)"],
+    ["Pelat", "2 kašike"],
+    ["Pileća/ćureća prsa u omotu", pk(w, "60g", "40g")],
+    ["Light mocarela", pk(w, "40g", "25g")] ] }),
   vecB: w => ({ rows: [["Nemasni/feta sir", pk(w, "50g", "30g")]] }),
   rucD: w => ({ rows: [
     ["Velika tortilja", "1 komad (cca 60g)"],
@@ -294,13 +304,13 @@ const ITEMS = {
 
 // index = Date.getDay(): 0 = nedelja
 const DAYS = [
-  { name: "Nedelja",    meals: ["dorC", "uzA", "slat", "whey", "rucC", "vecA", "mg"] },
-  { name: "Ponedeljak", meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Utorak",     meals: ["dorB", "uzB", "jog", "whey", "rucD", "vecB", "mg"] },
-  { name: "Sreda",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Četvrtak",   meals: ["dorB", "uzB", "jog", "whey", "rucD", "vecB", "mg"] },
-  { name: "Petak",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecA", "mg"] },
-  { name: "Subota",     meals: ["dorB", "uzC", "jog", "whey", "rucC", "vecA", "mg"] },
+  { name: "Nedelja",    meals: ["dorC", "uzA", "slat", "whey", "rucC", "vecT", "mg"] },
+  { name: "Ponedeljak", meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecP", "mg"] },
+  { name: "Utorak",     meals: ["dorB", "uzB", "jog", "rucD", "vecB", "mg"] },
+  { name: "Sreda",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecT", "mg"] },
+  { name: "Četvrtak",   meals: ["dorB", "uzB", "jog", "rucD", "vecB", "mg"] },
+  { name: "Petak",      meals: ["dorA", "uzA", "slat", "whey", "rucA", "vecP", "mg"] },
+  { name: "Subota",     meals: ["dorB", "uzC", "jog", "rucC", "vecB", "mg"] },
 ];
 
 /* ---------- Kalkulator ---------- */

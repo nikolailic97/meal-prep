@@ -206,9 +206,19 @@ const RECIPES = {
     steps: "Šampinjone iseći na listiće i pržiti na jakoj vatri 4–5 min dok ne upiju vodu. Dodati papriku još 2 min. Umutiti jaja sa prstohvatom soli, preliti i peći sa obe strane. Nikola 3–4 jaja + 80g šampinjona + 40g paprike + 1–2 kriške hleba, Nina 3 jaja + 70g šampinjona + 35g paprike + 1 kriška hleba.",
   },
   kasa: {
-    title: "Ovsena kaša",
-    ingredients: "Za 1 dan: 100g ovsenih pahuljica (Nikola 60g + Nina 40g), 350ml vode (Nikola 200ml + Nina 150ml), 1/2 banane za Nikolu, šaka bobičastog voća za Ninu, cimet ili kakao. Za 2 dana: 200g pahuljica, 1 banana, 2 šake bobičastog voća",
-    steps: "Pahuljice kuvati u vodi 3–5 min uz mešanje. Dodati cimet (Nikola može i kakao). Nikola: dodati pola banane. Nina: dodati šaku bobičastog voća.",
+    title: "Ovsena kaša sa whey-em",
+    ingredients: "Za 1 dan: 100g ovsenih pahuljica (Nikola 60g + Nina 40g), 350ml vode (Nikola 200ml + Nina 150ml), 2 merice whey proteina (po 1 za svakog), 1/2 banane za Nikolu, šaka bobičastog voća za Ninu, cimet ili kakao. Za 2 dana: 200g pahuljica, 4 merice whey-a, 1 banana, 2 šake bobičastog voća",
+    steps: "Pahuljice kuvati u vodi 3–5 min uz mešanje. Skloniti sa vatre i pustiti da se kaša malo prohladi, pa umešati 1 mericu whey-a (u vrućoj kaši se zgruša). Dodati cimet (Nikola može i kakao). Nikola: dodati pola banane. Nina: dodati šaku bobičastog voća. Tog dana nema merice whey-a posle treninga.",
+  },
+  tost: {
+    title: "Zapečeni tost sa prsima i sirom",
+    ingredients: "Za 1 večeru: 5 kriški integralnog tosta (Nikola 3 + Nina 2), 90g pilećih ili ćurećih prsa u omotu (Nikola 60g + Nina 30g), 50g light mocarele (Nikola 30g + Nina 20g), kupus salata sa strane",
+    steps: "Na svaku krišku tosta staviti deo prsa i mocarelu, pa poklopiti drugom kriškom. Zapeći u aparatu za tost ili u suvom tiganju na srednjoj vatri 2–3 min sa svake strane dok sir ne počne da se topi. Uz to činija hladne kupus salate. Nikola 3 kriške + 60g prsa + 30g mocarele, Nina 2 kriške + 30g prsa + 20g mocarele.",
+  },
+  pica: {
+    title: "Brza pica na tortilji",
+    ingredients: "Za 1 večeru: 2 velike tortilje (cca 60g svaka), 4 kašike pelata, origano, 100g pilećih ili ćurećih prsa u omotu (Nikola 60g + Nina 40g), 65g light mocarele (Nikola 40g + Nina 25g), kupus salata sa strane",
+    steps: "Tortilju premazati sa 2 kašike pelata i posuti origanom. Rasporediti isečena prsa, pa mocarelu. Staviti u suvi tiganj na nisku vatru, poklopiti i držati 3–4 min dok se sir ne otopi i dno ne postane hrskavo. Može i u rernu ili air fryer na 200°C 5 min. Uz to činija kupus salate. Nikola 60g prsa + 40g mocarele, Nina 40g prsa + 25g mocarele.",
   },
 };
 
@@ -221,6 +231,8 @@ const RECIPE_ORDER = [
   ["omlet", "Doručak: ponedeljak, sreda, petak"],
   ["kasa", "Doručak: utorak, četvrtak, subota"],
   ["omletC", "Doručak: nedelja"],
+  ["tost", "Večera: nedelja, sreda"],
+  ["pica", "Večera: ponedeljak, petak"],
 ];
 
 /* ---------- Hrana van plana ---------- */
@@ -239,11 +251,27 @@ const FOOD = [
     n: "150g podloge (cca 55% pice) · 3 kašike pelata · 110g prsa · 55g mozzarelle · 80g povrća",
     m: "120g podloge (cca 45% pice) · 2 kašike pelata · 90g prsa · 45g mozzarelle · 60g povrća",
     steps: "Prsa iseći na sitne kockice, začiniti solju, biberom i origanom i kratko propržiti na suvom tiganju 3–4 min. Podlogu za picu premazati pelatom (ukupno 5 kašika). Rasporediti prsa, povrće i na kraju mozzarellu. Peći u rerni prema uputstvu na pakovanju podloge. Ukupno za celu picu: 5 kašika pelata, 200g prsa, 100g mozzarelle, povrće po želji.",
-    note: "Ako pica menja ručak: taj dan preskoči spremljeni ručak (ide u frižider za sledeći dan ili u zamrzivač). Ako menja večeru: preskoči tunjevinu ili jaja. Užine i doručak ostaju isti. Količine su za celu podlogu od 270g (Nikola 150g + Nina 120g). Posle pečenja podeli picu na oko 55% / 45%, ili izmeri podlogu pre nego što je premažeš pelatom.",
+    note: "Ako pica menja ručak: taj dan preskoči spremljeni ručak (ide u frižider za sledeći dan ili u zamrzivač). Ako menja večeru: preskoči tost, brzu picu ili jaja. Užine i doručak ostaju isti. Količine su za celu podlogu od 270g (Nikola 150g + Nina 120g). Posle pečenja podeli picu na oko 55% / 45%, ili izmeri podlogu pre nego što je premažeš pelatom.",
+  },
+  {
+    title: "Cezar salata sa piletinom i kupusom",
+    replaces: "Menja večeru (tost, brzu picu ili jaja), jedan obrok, ne doručak",
+    buy: [
+      "Pečena ili kuvana piletina od ručka (ostatak ili 200g više)",
+      "Kupus za salatu",
+      "Grčki jogurt, Pilos",
+      "Senf",
+      "Beli luk u prahu i limun",
+      "Pirinčane galete",
+    ],
+    n: "120g pečene piletine · kupus salata (200g) · 2–3 kašike dresinga · 2 izmrvljene galete (cca 300 kcal, 42g proteina)",
+    m: "80g pečene piletine · kupus salata (150g) · 2–3 kašike dresinga · 2 izmrvljene galete (cca 230 kcal, 28g proteina)",
+    steps: "Dresing: 2–3 kašike grčkog jogurta pomešati sa 1 kafenom kašičicom senfa, prstohvatom belog luka u prahu i par kapi limuna. Piletinu iseći na kockice. U dubokoj činiji pomešati kupus salatu i piletinu, preliti dresingom i posuti izmrvljenim galetama.",
+    note: "Najbolje kad ti ostane pečene piletine od ručka (ponedeljak, sreda, petak), inače skuvaj 200g više. Kalorije su okvirne (greška oko 10%). Ako je dnevni zbir previsok, izbaci jednu galetu.",
   },
   {
     title: "Proteinske palačinke (zajedničko testo)",
-    replaces: "Menja večeru (tunjevinu ili jaja), jedan obrok, ne doručak",
+    replaces: "Menja večeru (tost, brzu picu ili jaja), jedan obrok, ne doručak",
     buy: [
       "Ovsene pahuljice, 80g",
       "Jaja, 4",
@@ -255,7 +283,7 @@ const FOOD = [
     n: "3 palačinke + 100g grčkog jogurta + šaka malina (cca 530 kcal, 40g proteina)",
     m: "2 palačinke + 100g grčkog jogurta + šaka malina (cca 380 kcal, 30g proteina)",
     steps: "U blender staviti 80g ovsenih pahuljica, 4 jaja, 140g grčkog jogurta, 1 bananu, 1 kašičicu praška za pecivo i prstohvat cimeta pa miksati oko 30 sekundi. Testo ostaviti da odstoji 5 minuta da pahuljice upiju tečnost. Peći na nonstick tiganju na srednjoj vatri, na suvo ili sa par kapi ulja, oko 2 minuta sa svake strane dok se ne pojave mehurići. Testo podeliti na 5 jednakih palačinki (jedna kutlača ili oko 80g testa po komadu). Poslužiti sa 100g grčkog jogurta i šakom malina, bez meda i sirupa.",
-    note: "Ukupno testo je za 5 palačinki: Nikola 3, Nina 2. Palačinke zamenjuju večeru (tunjevinu ili jaja), a posle treninga ostaju pola banane i merica whey-a u vodi. Na dan bez treninga merica whey-a može u testo: 1 merica whey-a + 40g jogurta umesto 140g jogurta + malo vode. Kalorije su okvirne (greška oko 10%).",
+    note: "Ukupno testo je za 5 palačinki: Nikola 3, Nina 2. Palačinke zamenjuju večeru (tost, brzu picu ili jaja), a posle treninga ostaju pola banane i merica whey-a u vodi. Na dan bez treninga merica whey-a može u testo: 1 merica whey-a + 40g jogurta umesto 140g jogurta + malo vode. Kalorije su okvirne (greška oko 10%).",
   },
   {
     title: "Overnight ovsena sa whey-em",
@@ -402,10 +430,11 @@ const PREP = {
     fresh: {
       title: "Spremaš svež taj dan (ne unapred)",
       items: [
-        "Četvrtak doručak: ovsena kaša",
+        "Četvrtak doručak: ovsena kaša sa whey-em",
         "Petak doručak: omlet sa povrćem (6 jaja + 150g paprike; Nikola može šampinjone)",
-        "Subota doručak: ovsena kaša",
-        "Užine i večere (tunjevina, jaja, galete, jogurt) ne traže kuvanje",
+        "Petak večera: brza pica na tortilji (5 min)",
+        "Subota doručak: ovsena kaša sa whey-em",
+        "Večere (kuvana jaja, brza pica) i užine (galete, jogurt) ne traže prep",
       ],
     },
   },
@@ -441,8 +470,10 @@ const PREP = {
       items: [
         "Nedelja doručak: omlet sa šampinjonima",
         "Ponedeljak i sreda doručak: omlet sa povrćem (6 jaja + 150g paprike; Nikola može šampinjone)",
-        "Utorak doručak: ovsena kaša",
-        "Večere (tunjevina, jaja, galete) i užine ne traže kuvanje",
+        "Utorak doručak: ovsena kaša sa whey-em",
+        "Nedelja i sreda večera: zapečeni tost sa prsima i sirom (5 min)",
+        "Ponedeljak večera: brza pica na tortilji (5 min)",
+        "Večera u utorak (kuvana jaja) i užine (galete, jogurt) ne traže prep",
       ],
     },
   },
